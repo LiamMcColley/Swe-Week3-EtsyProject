@@ -16,10 +16,8 @@ export default function App() {
 
           <Routes>
             <Route path="/" element={<Navbar />}>
-              {/* <Route path="/" element={<Home />}> */}
-
-              <Route index element={<Home />} />
-              <Route path="/cart" element={<Cart />} />
+              <Route index element={<Home items={sampleItems} />} />
+              <Route path="/cart" element={<Cart items={sampleItems} />} />
 
               <Route
                 path="*"
