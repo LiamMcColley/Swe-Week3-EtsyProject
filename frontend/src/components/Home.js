@@ -141,6 +141,7 @@ function Home(props) {
                       title: work.title,
                       authors: work.authors[0].name,
                       coverId: work.cover_id,
+                      bookId: work.key,
                     }}
                   >
                     <Card sx={{ minWidth: 275, maxWidth: 345 }}>

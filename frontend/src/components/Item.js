@@ -24,9 +24,10 @@ import { Carousel } from "react-bootstrap";
 function Item(props) {
   const { state } = useLocation();
   const [dummy, setDummy] = useState();
-  const { title, authors, coverId } = state;
+  const { title, authors, coverId, bookId } = state;
 
   const [similarBooks, setSimilarBooks] = useState();
+  const [bookDesc, setDesc] = useState();
 
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
@@ -34,6 +35,9 @@ function Item(props) {
       //.then((data) => console.log(data))
       .then((data) => setSimilarBooks(data))
       .then(console.log(similarBooks));
+    fetch("http://localhost:9000/store/book?key=" + bookId)
+      .then((res) => res.json())
+      .then((data) => setDesc(data));
   }, []);
 
   const ExpandMore = styled((props) => {
@@ -91,11 +95,7 @@ function Item(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-                <Typography paragraph>Method:</Typography>
-                <Typography paragraph>
-                  Heat 1/2 cup of the broth in a pot until simmering, add
-                  saffron and set aside for 10 minutes.
-                </Typography>
+                <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
                 <Carousel>
@@ -109,6 +109,7 @@ function Item(props) {
                               title: work.title,
                               authors: work.authors[0].name,
                               coverId: work.cover_id,
+                              bookId: work.key,
                             }}
                           >
                             <Card sx={{ minWidth: 275, maxWidth: 345 }}>
