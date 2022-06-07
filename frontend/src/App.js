@@ -14,7 +14,7 @@ export default function App() {
 
       <AccessTokenProvider>
         <div className="App">
-          <h1>Boiler Plate</h1>
+          {/* <h1>Boiler Plate</h1> */}
 
           <Routes>
             <Route path="/" element={<Navbar />}>
