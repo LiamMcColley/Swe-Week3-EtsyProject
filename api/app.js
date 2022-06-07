@@ -58,4 +58,6 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
 module.exports = app;
