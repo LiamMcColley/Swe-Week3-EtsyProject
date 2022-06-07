@@ -16,100 +16,108 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
 function Home(props) {
+  useEffect(() => {
+    fetch("http://localhost:9000/store/subjects?subject=" + "love").then(res => res.json())
+      .then(data => console.log(data))
+    fetch("http://localhost:9000/store/author?authorkey=" + "/authors/OL4327048A").then(res => res.json())
+      .then(data => console.log(data))
+
+
+  }, []);
   return (
     <>
       {/* <Navbar setPage={"Home"}></Navbar> */}
       <br></br>
       <br></br>
       <br></br>
-    <div className="home--container">
-      <div className="carousel--container">
-        <Carousel className="carouselImage">
-          <Carousel.Item>
-            <img
-              className="d-block w-100 "
-              src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 "
-              src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
-              alt="Second slide"
-            />
+      <div className="home--container">
+        <div className="carousel--container">
+          <Carousel className="carouselImage">
+            <Carousel.Item>
+              <img
+                className="d-block w-100 "
+                src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100 "
+                src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
+                alt="Second slide"
+              />
 
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 "
-              src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
-              alt="Third slide"
-            />
+              <Carousel.Caption>
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100 "
+                src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
+                alt="Third slide"
+              />
 
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-      </div>
-      <Stack direction="row" spacing={2} className="avatar--container">
-        <div>
-        <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
+              <Carousel.Caption>
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
         </div>
-        <div>
-        <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
-        </div>
-        <div>
-        <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
-        </div>
-        <div>
-        <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
-        </div>
-        <div>
-        <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
-        </div>
-       
-     </Stack>
+        <Stack direction="row" spacing={2} className="avatar--container">
+          <div>
+            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <p>Under $10</p>
+          </div>
+          <div>
+            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <p>Under $10</p>
+          </div>
+          <div>
+            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <p>Under $10</p>
+          </div>
+          <div>
+            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <p>Under $10</p>
+          </div>
+          <div>
+            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <p>Under $10</p>
+          </div>
 
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        alignItems="center"
-        justify="center"
-        className="grid--container"
-      >
-        {props.items.map((item) => (
-          <Grid item xs={12} sm={6} md={3} key={props.items.indexOf(item)}>
-            <Button>
-              <Link to="/item">
-                <Card sx={{ minWidth: 275, maxWidth: 345 }}>
-                  <CardMedia />
-                  <CardHeader title={item.title} />
-                  <CardContent>
-                    <Typography variant="body">{item.description}</Typography>
-                  </CardContent>
-                </Card>
-              </Link>
-            </Button>
-          </Grid>
-        ))}
-      </Grid>
+        </Stack>
+
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          alignItems="center"
+          justify="center"
+          className="grid--container"
+        >
+          {props.items.map((item) => (
+            <Grid item xs={12} sm={6} md={3} key={props.items.indexOf(item)}>
+              <Button>
+                <Link to="/item">
+                  <Card sx={{ minWidth: 275, maxWidth: 345 }}>
+                    <CardMedia />
+                    <CardHeader title={item.title} />
+                    <CardContent>
+                      <Typography variant="body">{item.description}</Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </>
   );
