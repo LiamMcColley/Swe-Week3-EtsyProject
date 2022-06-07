@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 export default function App() {
   return (
     <>
+
       <AccessTokenProvider>
         <div className="App">
           <h1>Boiler Plate</h1>
