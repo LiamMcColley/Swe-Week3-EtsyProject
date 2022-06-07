@@ -3,19 +3,26 @@ import Navbar from "./Navbar";
 import { useState, useEffect, useContext } from "react";
 
 import { Link, Outlet, useNavigate } from "react-router-dom";
-
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import { Carousel } from 'react-bootstrap';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Cards from './Cards'
+import PaginationBasic from './PaginationBasic'
+import "../App.css";
 
 function Home(props) {
+  const [books,setBooks] = useState(props.items);
+  const [loading,setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookPerPage, setBookPerPage] = useState(8);
+
+  const indexOfLastBook = currentPage * bookPerPage;
+  const indexOfFirstBook = indexOfLastBook - bookPerPage;
+  const currentBooks = books.slice(indexOfFirstBook,indexOfLastBook);
+
+  const paginate=(pageNumber)=>setCurrentPage(pageNumber);
+
+
   return (
     <>
       {/* <Navbar setPage={"Home"}></Navbar> */}
@@ -23,6 +30,7 @@ function Home(props) {
       <br></br>
       <br></br>
     <div className="home--container">
+      
       <div className="carousel--container">
         <Carousel className="carouselImage">
           <Carousel.Item>
@@ -65,51 +73,32 @@ function Home(props) {
       <Stack direction="row" spacing={2} className="avatar--container">
         <div>
         <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
+        <p>Fiction</p>
         </div>
         <div>
         <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
+        <p>Romance</p>
         </div>
         <div>
         <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
+        <p>Drama</p>
         </div>
         <div>
         <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
+        <p>Classic Literature</p>
         </div>
         <div>
         <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }}/>
-        <p>Under $10</p>
+        <p>Adventure</p>
         </div>
        
      </Stack>
 
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        alignItems="center"
-        justify="center"
-        className="grid--container"
-      >
-        {props.items.map((item) => (
-          <Grid item xs={12} sm={6} md={3} key={props.items.indexOf(item)}>
-            <Button>
-              <Link to="/item">
-                <Card sx={{ minWidth: 275, maxWidth: 345 }}>
-                  <CardMedia />
-                  <CardHeader title={item.title} />
-                  <CardContent>
-                    <Typography variant="body">{item.description}</Typography>
-                  </CardContent>
-                </Card>
-              </Link>
-            </Button>
-          </Grid>
-        ))}
-      </Grid>
+      <div className="">
+        <Cards items={currentBooks}/>
+        <PaginationBasic bookPerPage={bookPerPage} totalBooks={books.length} paginate = {paginate}/>
+     </div>
+      
       </div>
     </>
   );
