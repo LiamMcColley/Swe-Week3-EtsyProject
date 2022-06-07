@@ -147,7 +147,11 @@ function Home(props) {
                       <CardMedia
                         component="img"
                         height="194"
-                        image="/static/images/cards/paella.jpg"
+                        image={
+                          "https://covers.openlibrary.org/b/id/" +
+                          work.cover_id +
+                          "-L.jpg"
+                        }
                         alt="Title"
                       />
                       <CardHeader title={work.title} />
