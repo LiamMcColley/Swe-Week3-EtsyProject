@@ -105,7 +105,10 @@ function Home(props) {
           {props.items.map((item) => (
             <Grid item xs={12} sm={6} md={3} key={props.items.indexOf(item)}>
               <Button>
-                <Link to="/item">
+                <Link
+                  to="/item"
+                  state={{ name: item.title, desc: item.description }}
+                >
                   <Card sx={{ minWidth: 275, maxWidth: 345 }}>
                     <CardMedia />
                     <CardHeader title={item.title} />
