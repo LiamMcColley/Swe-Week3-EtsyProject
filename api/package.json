@@ -13,13 +13,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-<<<<<<< HEAD
     "morgan": "~1.9.1"
   },
   "proxy": "http://localhost:9000"
-=======
-    "morgan": "~1.9.1",
-    "node-fetch": "^2.6.6"
-  }
->>>>>>> 1a6f9631654dfcccadf3ef1716bec7229bdbf731
 }
