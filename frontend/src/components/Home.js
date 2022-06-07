@@ -139,7 +139,7 @@ function Home(props) {
                     to="/item"
                     state={{
                       title: work.title,
-                      authors: work.authors,
+                      authors: work.authors[0].name,
                       coverId: work.cover_id,
                     }}
                   >
