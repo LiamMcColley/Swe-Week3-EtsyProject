@@ -12,18 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const theme = createTheme({
-  palette: {
-    neutral: {
-      main: "#64748B",
-      contrastText: "#fff",
-    },
-    selected: {
-      main: "#1DB954",
-      contrastText: "#fff",
-    },
-  },
-});
+import theme from "./theme.js"
 
 const navbarData = [
   {
@@ -62,7 +51,7 @@ function Navbar(props) {
                 {...{
                   variant: "contained",
                   key: label,
-                  color: "selected",
+                  color: "secondary",
                   to: href,
                   component: Link,
                 }}
@@ -70,6 +59,7 @@ function Navbar(props) {
                 {label}
               </Button>
             </Link>
+
           </ThemeProvider>
         );
       }
@@ -100,7 +90,7 @@ function Navbar(props) {
   return (
     <header>
       <ThemeProvider theme={theme}>
-        <AppBar className="header" style={{ backgroundColor: "black" }}>
+        <AppBar className="header" style={{ backgroundColor: "primary" }}>
           {displayDesktop()}
         </AppBar>
       </ThemeProvider>
