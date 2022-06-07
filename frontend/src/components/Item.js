@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import {
   styled,
@@ -18,7 +19,17 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Item(props) {
   const { state } = useLocation();
-  const { name, desc } = state;
+  const { name, authors, coverId } = state;
+
+  const [bookInfo, setBookInfo] = useState();
+
+  useEffect(() => {
+    fetch("http://localhost:9000/store/subjects?subject=" + "love")
+      .then((res) => res.json())
+      //.then((data) => console.log(data))
+      .then((data) => setBookInfo(data))
+      .then(console.log(bookInfo));
+  }, []);
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -41,13 +52,15 @@ function Item(props) {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Card>
+          <Card sx={{ alignContent: "center" }}>
             <CardHeader title={name} subheader="September 14, 2016" />
             <CardMedia
               component="img"
-              height="194"
-              image="/static/images/cards/paella.jpg"
+              image={
+                "https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg"
+              }
               alt="Paella dish"
+              sx={{ alignContent: "center", maxWidth: 300 }}
             />
             <CardContent>
               <Typography variant="body2" color="text.secondary">
@@ -79,7 +92,6 @@ function Item(props) {
           </Card>
 
           <div>{name}</div>
-          <div>{desc}</div>
         </Grid>
       </Grid>
     </>
