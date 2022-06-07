@@ -11,25 +11,27 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { Carousel } from 'react-bootstrap';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import { Carousel } from "react-bootstrap";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 function Home(props) {
+  const [bookList, setBookList] = useState(null);
+
   useEffect(() => {
-    fetch("http://localhost:9000/store/subjects?subject=" + "love").then(res => res.json())
-      .then(data => console.log(data))
-    fetch("http://localhost:9000/store/author?authorkey=" + "/authors/OL4327048A").then(res => res.json())
-      .then(data => console.log(data))
-
-
+    fetch("http://localhost:9000/store/subjects?subject=" + "love")
+      .then((res) => res.json())
+      //.then((data) => console.log(data))
+      .then((data) => setBookList(data))
+      .then(console.log(bookList));
+    fetch(
+      "http://localhost:9000/store/author?authorkey=" + "/authors/OL4327048A"
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }, []);
   return (
     <>
-      {/* <Navbar setPage={"Home"}></Navbar> */}
-      <br></br>
-      <br></br>
-      <br></br>
       <div className="home--container">
         <div className="carousel--container">
           <Carousel className="carouselImage">
@@ -41,7 +43,9 @@ function Home(props) {
               />
               <Carousel.Caption>
                 <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <p>
+                  Nulla vitae elit libero, a pharetra augue mollis interdum.
+                </p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -65,34 +69,59 @@ function Home(props) {
 
               <Carousel.Caption>
                 <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <p>
+                  Praesent commodo cursus magna, vel scelerisque nisl
+                  consectetur.
+                </p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </div>
         <Stack direction="row" spacing={2} className="avatar--container">
           <div>
-            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              alt="Remy Sharp"
+              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              sx={{ width: 100, height: 100 }}
+            />
             <p>Under $10</p>
           </div>
           <div>
-            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              alt="Remy Sharp"
+              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              sx={{ width: 100, height: 100 }}
+            />
             <p>Under $10</p>
           </div>
           <div>
-            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              alt="Remy Sharp"
+              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              sx={{ width: 100, height: 100 }}
+            />
             <p>Under $10</p>
           </div>
           <div>
-            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              alt="Remy Sharp"
+              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              sx={{ width: 100, height: 100 }}
+            />
             <p>Under $10</p>
           </div>
           <div>
-            <Avatar alt="Remy Sharp" src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg" sx={{ width: 100, height: 100 }} />
+            <Avatar
+              alt="Remy Sharp"
+              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              sx={{ width: 100, height: 100 }}
+            />
             <p>Under $10</p>
           </div>
-
         </Stack>
+
+        <br></br>
+        <br></br>
 
         <Grid
           container
@@ -102,24 +131,30 @@ function Home(props) {
           justify="center"
           className="grid--container"
         >
-          {props.items.map((item) => (
-            <Grid item xs={12} sm={6} md={3} key={props.items.indexOf(item)}>
-              <Button>
-                <Link
-                  to="/item"
-                  state={{ name: item.title, desc: item.description }}
-                >
-                  <Card sx={{ minWidth: 275, maxWidth: 345 }}>
-                    <CardMedia />
-                    <CardHeader title={item.title} />
-                    <CardContent>
-                      <Typography variant="body">{item.description}</Typography>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </Button>
-            </Grid>
-          ))}
+          {bookList &&
+            bookList.works.map((work) => (
+              <Grid item xs={12} sm={3} key={bookList.works.indexOf(work)}>
+                <Button>
+                  <Link to="/item" state={{ name: work.title }}>
+                    <Card sx={{ minWidth: 275, maxWidth: 345 }}>
+                      <CardMedia
+                        component="img"
+                        height="194"
+                        image="/static/images/cards/paella.jpg"
+                        alt="Title"
+                      />
+                      <CardHeader title={work.title} />
+                      <CardContent>
+                        <Typography variant="body">
+                          {work.authors[0].name}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </Button>
+              </Grid>
+            ))}
+          {!bookList && <div>Loading...</div>}
         </Grid>
       </div>
     </>
