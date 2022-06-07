@@ -11,6 +11,7 @@ var appRouter = require("./routes/store");
 const dotenv = require("dotenv").config();
 
 var app = express();
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -57,7 +58,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 module.exports = app;
