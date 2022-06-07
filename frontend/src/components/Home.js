@@ -26,7 +26,9 @@ function Home(props) {
       .then(console.log(bookList));
     fetch(
       "http://localhost:9000/store/author?authorkey=" + "/authors/OL4327048A"
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }, []);
   return (
     <>
@@ -118,6 +120,9 @@ function Home(props) {
           </div>
         </Stack>
 
+        <br></br>
+        <br></br>
+
         <Grid
           container
           spacing={2}
@@ -132,7 +137,12 @@ function Home(props) {
                 <Button>
                   <Link to="/item" state={{ name: work.title }}>
                     <Card sx={{ minWidth: 275, maxWidth: 345 }}>
-                      <CardMedia />
+                      <CardMedia
+                        component="img"
+                        height="194"
+                        image="/static/images/cards/paella.jpg"
+                        alt="Title"
+                      />
                       <CardHeader title={work.title} />
                       <CardContent>
                         <Typography variant="body">
