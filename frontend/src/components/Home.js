@@ -135,12 +135,23 @@ function Home(props) {
             bookList.works.map((work) => (
               <Grid item xs={12} sm={3} key={bookList.works.indexOf(work)}>
                 <Button>
-                  <Link to="/item" state={{ name: work.title }}>
+                  <Link
+                    to="/item"
+                    state={{
+                      title: work.title,
+                      authors: work.authors[0].name,
+                      coverId: work.cover_id,
+                    }}
+                  >
                     <Card sx={{ minWidth: 275, maxWidth: 345 }}>
                       <CardMedia
                         component="img"
                         height="194"
-                        image="/static/images/cards/paella.jpg"
+                        image={
+                          "https://covers.openlibrary.org/b/id/" +
+                          work.cover_id +
+                          "-L.jpg"
+                        }
                         alt="Title"
                       />
                       <CardHeader title={work.title} />
