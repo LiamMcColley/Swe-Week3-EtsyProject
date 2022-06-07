@@ -6,6 +6,7 @@ import CartContext from "./contexts/cartContext";
 import Cart from "./components/cart";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
+import Item from "./components/Item";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/" element={<Navbar />}>
               <Route index element={<Home items={sampleItems} />} />
               <Route path="/cart" element={<Cart items={sampleItems} />} />
+              <Route path="/item" element={<Item />} />
 
               <Route
                 path="*"
