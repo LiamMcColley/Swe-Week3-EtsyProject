@@ -29,14 +29,14 @@ function Home() {
     await fetch("http://localhost:9000/store/subjects?subject=" + tag)
       .then((res) => res.json())
       //.then((data) => console.log(data))
-      .then((data) => {setBooks(data.works)
-        console.log(data.works)});
-      
+      .then((data) => {
+        setBooks(data.works)
+      });
+
   };
 
   useEffect(() => {
     getBooks("fiction");
-    console.log(books)
   }, []);
 
 
@@ -49,7 +49,7 @@ function Home() {
       <br></br>
       <div className="home--container">
         <div className="carousel--container">
-          {books.length != 0&&<CarouselBasic work={books}/>}
+          {books.length != 0 && <CarouselBasic work={books} />}
         </div>
 
         <Stack direction="row" spacing={2} className="avatar--container">
