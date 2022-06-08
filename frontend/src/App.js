@@ -1,17 +1,19 @@
 import { Link, Routes, Route } from "react-router-dom";
 import "./App.css";
 import AccessTokenProvider from "./contexts/accessTokenContext";
-import CartContext from "./contexts/cartContext";
+import CartArrayProvider from "./contexts/cartContext";
 
 import Cart from "./components/cart";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import Item from "./components/items/Item";
+import Item from "./components/Item";
 
 export default function App() {
   return (
     <>
-      <AccessTokenProvider>
+
+      <CartArrayProvider>
+
         <div className="App">
           <Routes>
             <Route path="/" element={<Navbar />}>
@@ -34,7 +36,7 @@ export default function App() {
             </Route>
           </Routes>
         </div>
-      </AccessTokenProvider>
+      </CartArrayProvider>
     </>
   );
 }

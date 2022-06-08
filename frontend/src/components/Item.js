@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   styled,
@@ -17,8 +17,14 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Carousel } from "react-bootstrap";
+import { CartContext } from "../contexts/cartContext";
 
 function Item(props) {
+  const { cartItems, setCartItems } = useContext(CartContext);
+
+
+
+
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
 
@@ -26,14 +32,31 @@ function Item(props) {
   const [similarBooks, setSimilarBooks] = useState();
   const [bookDesc, setDesc] = useState();
 
+  let cartEntry = {};
+
+  if (cartItems) {
+    cartEntry = cartItems;
+  }
+  cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
+
+  // if (cartEntry[title]) {
+  //   cartEntry[title].count = cartEntry[title].count + 1;
+  // } else {
+  // }
+
+
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
       .then((res) => res.json())
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data));
+      .then((data) => setDesc(data))
+
+
+
   }, [invoke]);
+
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -53,7 +76,10 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-    console.log("clicked");
+
+    setCartItems(cartEntry);
+    console.log(cartItems)
+
   };
 
   return (
