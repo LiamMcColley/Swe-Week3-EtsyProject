@@ -37,8 +37,12 @@ function Item(props) {
   if (cartItems) {
     cartEntry = cartItems;
   }
-
   cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
+
+  // if (cartEntry[title]) {
+  //   cartEntry[title].count = cartEntry[title].count + 1;
+  // } else {
+  // }
 
 
   useEffect(() => {
