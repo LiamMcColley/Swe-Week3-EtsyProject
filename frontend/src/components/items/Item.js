@@ -32,7 +32,7 @@ function Item(props) {
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data.description));
+      .then((data) => setDesc(data));
   }, [invoke]);
 
   const ExpandMore = styled((props) => {
@@ -90,7 +90,7 @@ function Item(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent sx={{ maxWidth: 400 }}>
-                <Typography>{bookDesc}</Typography>
+                <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
                 <Carousel>
