@@ -30,6 +30,11 @@ function Item(props) {
   const [bookDesc, setDesc] = useState();
 
   let cartEntry = {};
+
+  if (cartItems) {
+    cartEntry = cartItems;
+  }
+
   cartEntry[title] = {
     author: authors,
     img: "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg",
@@ -43,13 +48,7 @@ function Item(props) {
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data));
-
-    setCartItems(cartEntry);
   }, [invoke]);
-
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -69,7 +68,8 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-    console.log("clicked");
+    setCartItems(cartEntry);
+    console.log(cartItems);
   };
 
   return (
