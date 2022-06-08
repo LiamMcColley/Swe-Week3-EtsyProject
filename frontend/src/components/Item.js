@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -34,22 +35,16 @@ function Item(props) {
   if (cartItems) {
     cartEntry = cartItems;
   }
-<<<<<<< HEAD
-
   cartEntry[title] = {
     author: authors,
     img: "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg",
     count: 1,
   };
-=======
-  cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
 
   // if (cartEntry[title]) {
   //   cartEntry[title].count = cartEntry[title].count + 1;
   // } else {
   // }
-
->>>>>>> dda9ef93eb676a2d4903190e9289d4caad00a21f
 
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
@@ -84,6 +79,9 @@ function Item(props) {
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <br></br>
       <br></br>
       <Grid container spacing={2}>

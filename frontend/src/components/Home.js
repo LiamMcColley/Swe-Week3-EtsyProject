@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "./Navbar";
 import { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
@@ -45,6 +46,9 @@ function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>Books a Trillion</title>
+      </Helmet>
       <br></br>
       <br></br>
       <br></br>
