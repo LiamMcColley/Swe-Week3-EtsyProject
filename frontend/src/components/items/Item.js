@@ -1,13 +1,10 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   styled,
   Grid,
   Button,
-  Link,
-  FormLabel,
-  FormControl,
   Card,
   CardHeader,
   CardMedia,
@@ -31,6 +28,7 @@ function Item(props) {
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
 
+  const [invoke, setInvoke] = useState();
   const [similarBooks, setSimilarBooks] = useState();
   const [bookDesc, setDesc] = useState();
 
@@ -46,15 +44,15 @@ function Item(props) {
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data.description))
+      .then((data) => setDesc(data))
 
     setCartItems(cartEntry);
 
-  }, []);
+  }, [invoke]);
+
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
-
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -91,7 +89,7 @@ function Item(props) {
                 "https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg"
               }
               alt={title}
-              sx={{ alignContent: "center", maxWidth: 330 }}
+              sx={{ alignContent: "center", maxWidth: 500 }}
             />
             <CardActions disableSpacing>
               <IconButton
@@ -110,15 +108,15 @@ function Item(props) {
               </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent sx={{ maxWidth: 300 }}>
-                <Typography>{bookDesc && bookDesc}</Typography>
+              <CardContent sx={{ maxWidth: 400 }}>
+                <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
                 <Carousel>
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
-                        <Button>
+                        <Button onClick={() => setInvoke(Math.random())}>
                           <Link
                             to="/item"
                             state={{
@@ -127,6 +125,7 @@ function Item(props) {
                               coverId: work.cover_id,
                               bookId: work.key,
                             }}
+                            style={{ textDecoration: "none" }}
                           >
                             <Card sx={{ minWidth: 275, maxWidth: 345 }}>
                               <CardMedia
