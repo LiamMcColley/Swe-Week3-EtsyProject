@@ -1,12 +1,10 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   styled,
   Grid,
   Button,
-  FormLabel,
-  FormControl,
   Card,
   CardHeader,
   CardMedia,
@@ -24,6 +22,7 @@ function Item(props) {
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
 
+  const [invoke, setInvoke] = useState();
   const [similarBooks, setSimilarBooks] = useState();
   const [bookDesc, setDesc] = useState();
 
@@ -34,7 +33,7 @@ function Item(props) {
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data.description));
-  }, []);
+  }, [invoke]);
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -98,7 +97,7 @@ function Item(props) {
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
-                        <Button>
+                        <Button onClick={() => setInvoke(Math.random())}>
                           <Link
                             to="/item"
                             state={{
