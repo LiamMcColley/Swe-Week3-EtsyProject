@@ -23,7 +23,6 @@ import { Carousel } from "react-bootstrap";
 
 function Item(props) {
   const { state } = useLocation();
-  const [dummy, setDummy] = useState();
   const { title, authors, coverId, bookId } = state;
 
   const [similarBooks, setSimilarBooks] = useState();
@@ -32,12 +31,10 @@ function Item(props) {
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
       .then((res) => res.json())
-      //.then((data) => console.log(data))
-      .then((data) => setSimilarBooks(data))
-      .then(console.log(similarBooks));
+      .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data));
+      .then((data) => setDesc(data.description));
   }, []);
 
   const ExpandMore = styled((props) => {
@@ -75,7 +72,7 @@ function Item(props) {
                 "https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg"
               }
               alt={title}
-              sx={{ alignContent: "center", maxWidth: 300 }}
+              sx={{ alignContent: "center", maxWidth: 330 }}
             />
             <CardActions disableSpacing>
               <IconButton
@@ -94,8 +91,8 @@ function Item(props) {
               </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography>{bookDesc && bookDesc.description}</Typography>
+              <CardContent sx={{ maxWidth: 300 }}>
+                <Typography>{bookDesc && bookDesc}</Typography>
               </CardContent>
               <CardContent>
                 <Carousel>
