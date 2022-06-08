@@ -78,6 +78,7 @@ function Item(props) {
   const handleShoppingClick = () => {
 
     setCartItems(cartEntry);
+
     console.log(cartItems)
 
   };
