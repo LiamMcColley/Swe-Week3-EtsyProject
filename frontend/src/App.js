@@ -6,7 +6,7 @@ import CartArrayProvider from "./contexts/cartContext";
 import Cart from "./components/cart";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import Item from "./components/items/Item";
+import Item from "./components/Item";
 
 export default function App() {
   return (

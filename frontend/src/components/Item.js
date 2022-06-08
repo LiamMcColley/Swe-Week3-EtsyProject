@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   styled,
@@ -32,9 +32,12 @@ function Item(props) {
   const [similarBooks, setSimilarBooks] = useState();
   const [bookDesc, setDesc] = useState();
 
-
-
   let cartEntry = {};
+
+  if (cartItems) {
+    cartEntry = cartItems;
+  }
+
   cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
 
 
@@ -46,13 +49,10 @@ function Item(props) {
       .then((res) => res.json())
       .then((data) => setDesc(data))
 
-    setCartItems(cartEntry);
+
 
   }, [invoke]);
 
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -72,7 +72,10 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-    console.log("clicked");
+
+    setCartItems(cartEntry);
+    console.log(cartItems)
+
   };
 
   return (
