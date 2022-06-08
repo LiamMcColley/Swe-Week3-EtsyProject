@@ -34,12 +34,22 @@ function Item(props) {
   if (cartItems) {
     cartEntry = cartItems;
   }
+<<<<<<< HEAD
 
   cartEntry[title] = {
     author: authors,
     img: "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg",
     count: 1,
   };
+=======
+  cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
+
+  // if (cartEntry[title]) {
+  //   cartEntry[title].count = cartEntry[title].count + 1;
+  // } else {
+  // }
+
+>>>>>>> dda9ef93eb676a2d4903190e9289d4caad00a21f
 
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
