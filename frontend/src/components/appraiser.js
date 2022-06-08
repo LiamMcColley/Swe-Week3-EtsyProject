@@ -1,7 +1,9 @@
 //takes in book title and runs it through a hash to generate the price
 //hash code algorithm taken from: https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
 export default function Appraise(title){
-    let maxPrice = 25;
+    let minPrice = 5;
+    let maxPrice = 25-minPrice;
+
 
     let hash = 0;
     if (title.length === 0) return hash;
@@ -11,5 +13,5 @@ export default function Appraise(title){
         hash = ((hash<<5)-hash)+char;
         hash = hash & hash; // Convert to 32bit integer
     }
-    return Math.abs(hash%maxPrice);
+    return Math.abs(hash%maxPrice)+minPrice;
 }
