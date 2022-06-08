@@ -33,6 +33,8 @@ function Cart() {
         setSubtotal(sum);
     };
 
+    //useState, useReducer (get functions to change it)
+
     useEffect(() => {
         getSubtotal();
         }, []
