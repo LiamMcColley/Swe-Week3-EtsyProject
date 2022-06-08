@@ -54,7 +54,8 @@ function Home() {
             <Carousel.Item>
               <img
                 className="d-block w-100 "
-                src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
+                src="https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png"
+                height={500}
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -67,7 +68,8 @@ function Home() {
             <Carousel.Item>
               <img
                 className="d-block w-100 "
-                src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
+                src="https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png"
+                height={500}
                 alt="Second slide"
               />
 
@@ -79,7 +81,8 @@ function Home() {
             <Carousel.Item>
               <img
                 className="d-block w-100 "
-                src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,pg_1,t_base_params/v1633017596/course-covers/000/002/493/2493-original.jpg?1633017596"
+                src="https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png"
+                height={500}
                 alt="Third slide"
               />
 
