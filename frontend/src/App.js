@@ -6,22 +6,20 @@ import CartContext from "./contexts/cartContext";
 import Cart from "./components/cart";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import Item from "./components/Item";
+import Item from "./components/items/Item";
+import Redirect from "./components/items/Redirect";
 
 export default function App() {
   return (
     <>
-
       <AccessTokenProvider>
         <div className="App">
-          {/* <h1>Boiler Plate</h1> */}
-
           <Routes>
             <Route path="/" element={<Navbar />}>
-              <Route index element={<Home items={sampleItems} />} />
+              <Route index element={<Home />} />
               <Route path="/cart" element={<Cart items={sampleItems} />} />
               <Route path="/item" element={<Item />} />
-
+              <Route path="/redir" element={<Redirect />} />
               <Route
                 path="*"
                 element={

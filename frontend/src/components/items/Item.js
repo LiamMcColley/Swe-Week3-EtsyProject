@@ -1,11 +1,10 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   styled,
   Grid,
   Button,
-  Link,
   FormLabel,
   FormControl,
   Card,
@@ -72,7 +71,7 @@ function Item(props) {
                 "https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg"
               }
               alt={title}
-              sx={{ alignContent: "center", maxWidth: 330 }}
+              sx={{ alignContent: "center", maxWidth: 500 }}
             />
             <CardActions disableSpacing>
               <IconButton
@@ -91,8 +90,8 @@ function Item(props) {
               </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent sx={{ maxWidth: 300 }}>
-                <Typography>{bookDesc && bookDesc}</Typography>
+              <CardContent sx={{ maxWidth: 400 }}>
+                <Typography>{bookDesc}</Typography>
               </CardContent>
               <CardContent>
                 <Carousel>
@@ -108,6 +107,7 @@ function Item(props) {
                               coverId: work.cover_id,
                               bookId: work.key,
                             }}
+                            style={{ textDecoration: "none" }}
                           >
                             <Card sx={{ minWidth: 275, maxWidth: 345 }}>
                               <CardMedia
