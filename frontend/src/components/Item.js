@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -22,9 +23,6 @@ import { CartContext } from "../contexts/cartContext";
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
 
-
-
-
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
 
@@ -45,19 +43,14 @@ function Item(props) {
 
   }
 
-
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
       .then((res) => res.json())
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data))
-
-
-
+      .then((data) => setDesc(data));
   }, [invoke]);
-
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -77,15 +70,16 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-
     setCartItems(cartEntry);
 
-    console.log(cartItems)
-
+    console.log(cartItems);
   };
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <br></br>
       <br></br>
       <Grid container spacing={2}>
