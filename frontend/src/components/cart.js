@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Appraise from './appraiser';
 import { CartContext } from "../contexts/cartContext";
+import TextField from '@mui/material/TextField';
 // import {useContext} from "@types/react";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -43,7 +44,7 @@ function Cart() {
 
   useEffect(() => {
     getSubtotal();
-  }, []
+  }, [cartItems]
   );
 
 
@@ -65,7 +66,30 @@ function Cart() {
                       {/*{console.log(book)}*/}
                       <Grid item xs={3}>{book}</Grid>
                       <Grid item xs={3}>{cartItems[book].author}</Grid>
-                      <Grid item xs={4}><NumericInput min={1} value={cartItems[book].count} onChange={() => cartItems[book].count += 1} /></Grid>
+                      <Grid item xs={4}>
+                        {/*<NumericInput min={1} value={cartItems[book].count} onChange={() => cartItems[book].count += 1} />*/}
+                        <TextField
+                            id="outlined-number"
+                            label="Count"
+                            type="number"
+                            size="small"
+                            fullWidth="false"
+                            defaultValue= {cartItems[book].count}
+                                onChange={(e) => {
+                              let temp = JSON.parse(JSON.stringify(cartItems));
+                              console.log(e.target.value);
+                              temp[book].count = e.target.value;
+                              setCartItems(temp);
+                            }}
+                            // width = {.7}
+                            InputLabelProps={{
+                              shrink: true,
+                              inputProps: { min: 0, max: 10 }
+
+                            }}
+                            style ={{width: '30%'}}
+                        />
+                      </Grid>
                       {/*{cartItems[book].count}*/}
                       <Grid item xs={3}>${cartItems[book].count * Appraise(book)}</Grid>
                     </Grid>
