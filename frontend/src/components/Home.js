@@ -1,35 +1,53 @@
 import React from "react";
 import Navbar from "./Navbar";
 import { useState, useEffect, useContext } from "react";
-
-import { Link, Outlet, useNavigate } from "react-router-dom";
-
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import PaginationBasic from "./PaginationBasic";
+import "../App.css";
 
-function Home(props) {
-  const [bookList, setBookList] = useState(null);
+function Home() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookPerPage, setBookPerPage] = useState(8);
+
+  const indexOfLastBook = currentPage * bookPerPage;
+  const indexOfFirstBook = indexOfLastBook - bookPerPage;
+  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
   useEffect(() => {
-    fetch("http://localhost:9000/store/subjects?subject=" + "love")
-      .then((res) => res.json())
-      //.then((data) => console.log(data))
-      .then((data) => setBookList(data))
-      .then(console.log(bookList));
+    getBooks("fiction");
+
     fetch(
       "http://localhost:9000/store/author?authorkey=" + "/authors/OL4327048A"
     ).then((res) => res.json());
+    //.then((data) => console.log(data));
   }, []);
+
+  const getBooks = (tag) => {
+    fetch("http://localhost:9000/store/subjects?subject=" + tag)
+      .then((res) => res.json())
+      //.then((data) => console.log(data))
+      .then((data) => setBooks(data.works));
+  };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
+      <br></br>
+      <br></br>
+      <br></br>
       <div className="home--container">
         <div className="carousel--container">
           <Carousel className="carouselImage">
@@ -75,66 +93,98 @@ function Home(props) {
             </Carousel.Item>
           </Carousel>
         </div>
+
         <Stack direction="row" spacing={2} className="avatar--container">
           <div>
             <Avatar
+              onClick={() => getBooks("fiction")}
+              className="avatar"
               alt="Remy Sharp"
-              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              src="https://img.buzzfeed.com/buzzfeed-static/static/2020-05/15/23/asset/055e07cd8f2e/sub-buzz-3206-1589584307-17.jpg"
               sx={{ width: 100, height: 100 }}
             />
-            <p>Under $10</p>
+            <p>Fiction</p>
           </div>
           <div>
             <Avatar
+              onClick={() => getBooks("love")}
+              className="avatar"
               alt="Remy Sharp"
-              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              src="https://images-na.ssl-images-amazon.com/images/I/61FR7FcEqEL.jpg"
               sx={{ width: 100, height: 100 }}
             />
-            <p>Under $10</p>
+            <p>Romance</p>
           </div>
           <div>
             <Avatar
+              onClick={() => getBooks("drama")}
+              className="avatar"
               alt="Remy Sharp"
-              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              src="https://readersentertainment.com/wp-content/uploads/2012/09/Drama.png"
               sx={{ width: 100, height: 100 }}
             />
-            <p>Under $10</p>
+            <p>Drama</p>
           </div>
           <div>
             <Avatar
+              onClick={() => getBooks("classic literature")}
+              className="avatar"
               alt="Remy Sharp"
-              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              src="https://static.onecms.io/wp-content/uploads/sites/23/2014/06/10/stack-of-classic-novels.jpg"
               sx={{ width: 100, height: 100 }}
             />
-            <p>Under $10</p>
+            <p>Classic Literature</p>
           </div>
           <div>
             <Avatar
+              onClick={() => getBooks("adventure")}
+              className="avatar"
               alt="Remy Sharp"
-              src="https://i.etsystatic.com/26564732/r/il/94c82b/2978999220/il_300x300.2978999220_m8mh.jpg"
+              src="https://damonza.com/wp-content/uploads/portfolio/fiction/torrent-15.jpg"
               sx={{ width: 100, height: 100 }}
             />
-            <p>Under $10</p>
+            <p>Adventure</p>
           </div>
         </Stack>
 
-        <Grid
-          container
-          spacing={2}
-          direction="row"
-          alignItems="center"
-          justify="center"
-          className="grid--container"
-        >
-          {bookList &&
-            bookList.works.map((work) => (
-              <Grid item xs={12} sm={3} key={bookList.works.indexOf(work)}>
+        <div className="card--container">
+          <Grid
+            container
+            spacing={2}
+            direction="row"
+            alignItems="center"
+            justify="center"
+            className="grid--container"
+          >
+            {currentBooks.map((work) => (
+              <Grid item xs={12} sm={6} md={3} key={currentBooks.indexOf(work)}>
                 <Button>
-                  <Link to="/item" state={{ name: work.title }}>
-                    <Card sx={{ minWidth: 275, maxWidth: 345 }}>
-                      <CardMedia />
+                  <Link
+                    to="/item"
+                    state={{
+                      title: work.title,
+                      authors: work.authors[0].name,
+                      coverId: work.cover_id,
+                      bookId: work.key,
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Card
+                      sx={{ minWidth: 275, maxWidth: 345 }}
+                      className="card"
+                    >
+                      <CardMedia
+                        component="img"
+                        height="194"
+                        image={
+                          "https://covers.openlibrary.org/b/id/" +
+                          work.cover_id +
+                          "-L.jpg"
+                        }
+                        alt="Title"
+                      />
                       <CardHeader title={work.title} />
-                      <CardContent>
+                      <CardContent className="card--content">
                         <Typography variant="body">
                           {work.authors[0].name}
                         </Typography>
@@ -144,8 +194,14 @@ function Home(props) {
                 </Button>
               </Grid>
             ))}
-          {!bookList && <div>Loading...</div>}
-        </Grid>
+          </Grid>
+
+          <PaginationBasic
+            bookPerPage={bookPerPage}
+            totalBooks={books.length}
+            paginate={paginate}
+          />
+        </div>
       </div>
     </>
   );

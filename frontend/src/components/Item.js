@@ -1,8 +1,11 @@
 import React from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import {
   styled,
   Grid,
+  Button,
+  Link,
   FormLabel,
   FormControl,
   Card,
@@ -15,10 +18,24 @@ import {
   IconButton,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Carousel } from "react-bootstrap";
 
 function Item(props) {
   const { state } = useLocation();
-  const { name, desc } = state;
+  const { title, authors, coverId, bookId } = state;
+
+  const [similarBooks, setSimilarBooks] = useState();
+  const [bookDesc, setDesc] = useState();
+
+  useEffect(() => {
+    fetch("http://localhost:9000/store/subjects?subject=" + "love")
+      .then((res) => res.json())
+      .then((data) => setSimilarBooks(data));
+    fetch("http://localhost:9000/store/book?key=" + bookId)
+      .then((res) => res.json())
+      .then((data) => setDesc(data.description));
+  }, []);
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -37,27 +54,33 @@ function Item(props) {
     setExpanded(!expanded);
   };
 
+  const handleShoppingClick = () => {
+    console.log("clicked");
+  };
+
   return (
     <>
+      <br></br>
+      <br></br>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Card>
-            <CardHeader title={name} subheader="September 14, 2016" />
+          <Card sx={{ alignContent: "center" }}>
+            <CardHeader title={title} subheader={authors} />
             <CardMedia
               component="img"
-              height="194"
-              image="/static/images/cards/paella.jpg"
-              alt="Paella dish"
+              image={
+                "https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg"
+              }
+              alt={title}
+              sx={{ alignContent: "center", maxWidth: 330 }}
             />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                This impressive paella is a perfect party dish and a fun meal to
-                cook together with your guests. Add 1 cup of frozen peas along
-                with the mussels, if you like.
-              </Typography>
-            </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites"></IconButton>
+              <IconButton
+                aria-label="add to favorites"
+                onClick={() => handleShoppingClick()}
+              >
+                <ShoppingCartIcon />
+              </IconButton>
               <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
@@ -68,18 +91,50 @@ function Item(props) {
               </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent sx={{ maxWidth: 300 }}>
+                <Typography>{bookDesc && bookDesc}</Typography>
+              </CardContent>
               <CardContent>
-                <Typography paragraph>Method:</Typography>
-                <Typography paragraph>
-                  Heat 1/2 cup of the broth in a pot until simmering, add
-                  saffron and set aside for 10 minutes.
-                </Typography>
+                <Carousel>
+                  {similarBooks &&
+                    similarBooks.works.map((work) => (
+                      <Carousel.Item>
+                        <Button>
+                          <Link
+                            to="/item"
+                            state={{
+                              title: work.title,
+                              authors: work.authors[0].name,
+                              coverId: work.cover_id,
+                              bookId: work.key,
+                            }}
+                          >
+                            <Card sx={{ minWidth: 275, maxWidth: 345 }}>
+                              <CardMedia
+                                component="img"
+                                height="200"
+                                image={
+                                  "https://covers.openlibrary.org/b/id/" +
+                                  work.cover_id +
+                                  "-L.jpg"
+                                }
+                                alt="Title"
+                              />
+                              <CardHeader title={work.title} />
+                              <CardContent>
+                                <Typography variant="body">
+                                  {work.authors[0].name}
+                                </Typography>
+                              </CardContent>
+                            </Card>
+                          </Link>
+                        </Button>
+                      </Carousel.Item>
+                    ))}
+                </Carousel>
               </CardContent>
             </Collapse>
           </Card>
-
-          <div>{name}</div>
-          <div>{desc}</div>
         </Grid>
       </Grid>
     </>
