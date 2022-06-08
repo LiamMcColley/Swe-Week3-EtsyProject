@@ -1,0 +1,20 @@
+Index: api/package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"name\": \"api\",\r\n  \"version\": \"0.0.0\",\r\n  \"private\": true,\r\n  \"scripts\": {\r\n    \"start\": \"node ./bin/www\"\r\n  },\r\n  \"dependencies\": {\r\n    \"cookie-parser\": \"~1.4.4\",\r\n    \"cors\": \"^2.8.5\",\r\n    \"debug\": \"~2.6.9\",\r\n    \"dotenv\": \"^16.0.1\",\r\n    \"express\": \"~4.16.1\",\r\n    \"http-errors\": \"~1.6.3\",\r\n    \"jade\": \"~1.11.0\",\r\n    \"morgan\": \"~1.9.1\"\r\n  },\r\n  \"proxy\": \"http://localhost:9000\"\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api/package.json b/api/package.json
+--- a/api/package.json	(revision d3e620e29044570bd4a14a3b61d7bcbb0c68d88c)
++++ b/api/package.json	(date 1654626564622)
+@@ -13,7 +13,8 @@
+     "express": "~4.16.1",
+     "http-errors": "~1.6.3",
+     "jade": "~1.11.0",
+-    "morgan": "~1.9.1"
++    "morgan": "~1.9.1",
++    "node-fetch": "^2.6.6"
+   },
+   "proxy": "http://localhost:9000"
+ }
