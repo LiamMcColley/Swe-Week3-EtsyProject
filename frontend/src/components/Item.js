@@ -19,9 +19,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
+import { PageContext } from "../contexts/pageContext";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
+  const { page, setPage } = useContext(PageContext);
 
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
@@ -53,6 +55,7 @@ function Item(props) {
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data));
+    setPage(window.location.href);
   }, [invoke]);
 
   const ExpandMore = styled((props) => {

@@ -16,12 +16,15 @@ import Stack from "@mui/material/Stack";
 import PaginationBasic from "./PaginationBasic";
 import CarouselBasic from "./Carousel";
 import "../App.css";
+import { PageContext } from "../contexts/pageContext";
 
 function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [bookPerPage, setBookPerPage] = useState(8);
+
+  const { page, setPage } = useContext(PageContext);
 
   const indexOfLastBook = currentPage * bookPerPage;
   const indexOfFirstBook = indexOfLastBook - bookPerPage;
@@ -32,13 +35,14 @@ function Home() {
       //.then((data) => console.log(data))
       .then((data) => {
         setBooks(data.works);
-        console.log(data.works);
+        //console.log(data.works);
       });
+    setPage(window.location.href);
   };
 
   useEffect(() => {
     getBooks("fiction");
-    console.log(books);
+    //console.log(books);
   }, []);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
