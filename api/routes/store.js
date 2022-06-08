@@ -16,7 +16,7 @@ router.get("/subjects", async (req, res, next) => {
     const url =
       "http://openlibrary.org/subjects/" +
       req.query.subject +
-      ".json?limit=100";
+      ".json?limit=50";
     const data = await fetch(url, {})
       .catch((err) => console.log(err))
       .then((res) => res.json())

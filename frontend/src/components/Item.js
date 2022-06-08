@@ -55,9 +55,6 @@ function Item(props) {
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data))
-
-
-
   }, [invoke]);
 
 
