@@ -14,6 +14,7 @@ import { Carousel } from "react-bootstrap";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import PaginationBasic from "./PaginationBasic";
+import CarouselBasic from "./Carousel";
 import "../App.css";
 
 function Home() {
@@ -25,22 +26,20 @@ function Home() {
   const indexOfLastBook = currentPage * bookPerPage;
   const indexOfFirstBook = indexOfLastBook - bookPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+  const getBooks = async (tag) => {
+    await fetch("http://localhost:9000/store/subjects?subject=" + tag)
+      .then((res) => res.json())
+      //.then((data) => console.log(data))
+      .then((data) => {
+        setBooks(data.works);
+        console.log(data.works);
+      });
+  };
 
   useEffect(() => {
     getBooks("fiction");
-
-    fetch(
-      "http://localhost:9000/store/author?authorkey=" + "/authors/OL4327048A"
-    ).then((res) => res.json());
-    //.then((data) => console.log(data));
+    console.log(books);
   }, []);
-
-  const getBooks = (tag) => {
-    fetch("http://localhost:9000/store/subjects?subject=" + tag)
-      .then((res) => res.json())
-      //.then((data) => console.log(data))
-      .then((data) => setBooks(data.works));
-  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -54,51 +53,7 @@ function Home() {
       <br></br>
       <div className="home--container">
         <div className="carousel--container">
-          <Carousel className="carouselImage">
-            <Carousel.Item>
-              <img
-                className="d-block w-100 "
-                src="https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png"
-                height={500}
-                alt="First slide"
-              />
-              <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100 "
-                src="https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png"
-                height={500}
-                alt="Second slide"
-              />
-
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100 "
-                src="https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png"
-                height={500}
-                alt="Third slide"
-              />
-
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
+          {books.length != 0 && <CarouselBasic work={books} />}
         </div>
 
         <Stack direction="row" spacing={2} className="avatar--container">

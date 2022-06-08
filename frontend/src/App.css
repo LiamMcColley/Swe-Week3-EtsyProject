@@ -50,8 +50,13 @@
 }
 .carouselImage{
   width: 784px;
-  height: 400px;
+  height: 430px;
   margin:auto;
+}
+.carouselImage img{
+  width: 784px;
+  height: 430px;
+
 }
 .avatar--container{
   position: absolute;

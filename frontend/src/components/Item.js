@@ -74,6 +74,7 @@ function Item(props) {
 
   const handleShoppingClick = () => {
     setCartItems(cartEntry);
+
     console.log(cartItems);
   };
 
@@ -117,7 +118,7 @@ function Item(props) {
                 <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
-                <Carousel>
+                <Carousel variant="dark">
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
