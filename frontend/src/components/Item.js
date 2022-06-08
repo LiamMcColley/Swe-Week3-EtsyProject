@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -18,12 +19,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
+import "../App.css";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
-
-
-
 
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
@@ -35,15 +34,15 @@ function Item(props) {
   let cartEntry = {};
 
   if (cartItems) {
-    cartEntry = cartItems;
+    cartEntry = JSON.parse(JSON.stringify(cartItems));
   }
-  cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
 
-  // if (cartEntry[title]) {
-  //   cartEntry[title].count = cartEntry[title].count + 1;
-  // } else {
-  // }
+  if (cartEntry[title]) {
+    cartEntry[title].count = cartEntry[title].count + 1;
+  } else {
+    cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
 
+  }
 
   useEffect(() => {
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
@@ -51,12 +50,8 @@ function Item(props) {
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data))
-
-
-
+      .then((data) => setDesc(data));
   }, [invoke]);
-
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -76,14 +71,16 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-
     setCartItems(cartEntry);
-    console.log(cartItems)
 
+    console.log(cartItems);
   };
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <br></br>
       <br></br>
       <Grid container spacing={2}>
@@ -119,7 +116,7 @@ function Item(props) {
                 <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
-                <Carousel variant="dark">
+                <Carousel variant="dark" className="carouselItemImage">
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
@@ -134,7 +131,7 @@ function Item(props) {
                             }}
                             style={{ textDecoration: "none" }}
                           >
-                            <Card sx={{ minWidth: 275, maxWidth: 345 }}>
+                            <Card sx={{ minWidth: 275, maxWidth: 275, height: 400 }}>
                               <CardMedia
                                 component="img"
                                 height="200"

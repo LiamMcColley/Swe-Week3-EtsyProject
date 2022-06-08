@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Navbar from "./Navbar";
 import { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
@@ -13,7 +14,7 @@ import { Carousel } from "react-bootstrap";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import PaginationBasic from "./PaginationBasic";
-import CarouselBasic from "./Carousel"
+import CarouselBasic from "./Carousel";
 import "../App.css";
 
 function Home() {
@@ -29,27 +30,29 @@ function Home() {
     await fetch("http://localhost:9000/store/subjects?subject=" + tag)
       .then((res) => res.json())
       //.then((data) => console.log(data))
-      .then((data) => {setBooks(data.works)
-        console.log(data.works)});
-      
+      .then((data) => {
+        setBooks(data.works)
+      });
+
   };
 
   useEffect(() => {
     getBooks("fiction");
-    console.log(books)
   }, []);
-
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
+      <Helmet>
+        <title>Books a Trillion</title>
+      </Helmet>
       <br></br>
       <br></br>
       <br></br>
       <div className="home--container">
         <div className="carousel--container">
-          {books.length != 0&&<CarouselBasic work={books}/>}
+          {books.length != 0 && <CarouselBasic work={books} />}
         </div>
 
         <Stack direction="row" spacing={2} className="avatar--container">

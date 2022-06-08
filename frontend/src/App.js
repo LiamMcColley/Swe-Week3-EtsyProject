@@ -11,9 +11,7 @@ import Item from "./components/Item";
 export default function App() {
   return (
     <>
-
       <CartArrayProvider>
-
         <div className="App">
           <Routes>
             <Route path="/" element={<Navbar />}>

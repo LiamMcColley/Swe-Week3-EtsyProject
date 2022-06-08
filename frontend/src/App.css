@@ -53,6 +53,11 @@
   height: 430px;
   margin:auto;
 }
+
+.carouselItemImage{
+  width: 400px;
+}
+
 .carouselImage img{
   width: 784px;
   height: 430px;
