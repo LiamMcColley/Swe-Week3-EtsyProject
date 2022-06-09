@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { Carousel } from "react-bootstrap";
 import "../App.css";
 
 function CarouselBasic(props) {
-  const randomIndex = Math.floor((Math.random() * 10) + 1);
+  const randomIndex = Math.floor(Math.random() * 10 + 1);
   return (
     <div>
       <Carousel className="carouselImage">
@@ -52,15 +52,12 @@ function CarouselBasic(props) {
 
           <Carousel.Caption>
             <h3>{props.work[randomIndex + 2].title}</h3>
-            <p>
-              {props.work[randomIndex + 2].authors[0].name}
-            </p>
+            <p>{props.work[randomIndex + 2].authors[0].name}</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-
     </div>
-  )
+  );
 }
 
-export default CarouselBasic
+export default CarouselBasic;

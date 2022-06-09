@@ -18,13 +18,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
+import { PageContext } from "../contexts/pageContext";
 import "../App.css";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
-
-
-
+  const { page, setPage } = useContext(PageContext);
 
   const { state } = useLocation();
   const { title, authors, coverId, bookId } = state;
@@ -35,8 +34,6 @@ function Item(props) {
 
   let cartEntry = {};
 
-
-
   if (cartItems) {
     cartEntry = JSON.parse(JSON.stringify(cartItems));
   }
@@ -44,21 +41,22 @@ function Item(props) {
   if (cartEntry[title]) {
     cartEntry[title].count = cartEntry[title].count + 1;
   } else {
-    cartEntry[title] = { "author": authors, "img": "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg", count: 1 };
-
+    cartEntry[title] = {
+      author: authors,
+      img: "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg",
+      count: 1,
+    };
   }
 
-
-
   useEffect(() => {
+    setPage(window.location.href);
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
       .then((res) => res.json())
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
-      .then((data) => setDesc(data))
+      .then((data) => setDesc(data));
   }, [invoke]);
-
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -78,10 +76,8 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-
     setCartItems(cartEntry);
-    console.log(cartItems)
-
+    console.log(cartItems);
   };
 
   return (
@@ -121,9 +117,7 @@ function Item(props) {
                 <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
-
                 <Carousel variant="dark" className="carouselItemImage">
-
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
@@ -138,7 +132,9 @@ function Item(props) {
                             }}
                             style={{ textDecoration: "none" }}
                           >
-                            <Card sx={{ minWidth: 275, maxWidth: 275, height: 400 }}>
+                            <Card
+                              sx={{ minWidth: 275, maxWidth: 275, height: 400 }}
+                            >
                               <CardMedia
                                 component="img"
                                 height="200"
