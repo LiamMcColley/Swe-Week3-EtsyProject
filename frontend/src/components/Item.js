@@ -23,10 +23,8 @@ import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
 import { PageContext } from "../contexts/pageContext";
 import "../App.css";
-import theme from "./theme.js"
-import Appraise from './appraiser';
-
-
+import theme from "./theme.js";
+import Appraise from "./appraiser";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -56,11 +54,13 @@ function Item(props) {
   }
 
   useEffect(() => {
-
     setPage(window.location.href);
-    fetch("http://localhost:9000/store/subjects5?subject=" + subject.toLowerCase())
+    fetch(
+      "http://localhost:9000/store/subjects5?subject=" + subject.toLowerCase()
+    )
       .then((res) => res.json())
-      .then((data) => setSimilarBooks(data));
+      .then((data) => setSimilarBooks(data))
+      .then((data) => console.log(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data));
@@ -84,31 +84,34 @@ function Item(props) {
   };
 
   const handleShoppingClick = () => {
-    <Alert severity="success">Added To Cart</Alert>
+    <Alert severity="success">Added To Cart</Alert>;
     setCartItems(cartEntry);
   };
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: "center",
-          flexWrap: 'wrap',
-          p: 1,
-          m: 1,
-          bgcolor: 'inherit',
-          maxWidth: 1920,
-          borderRadius: 1,
-        }}>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "space-around",
-            mx: 2,
-            minHeight: 500,
-            maxHeight: 500,
-
-          }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            p: 1,
+            m: 1,
+            bgcolor: "inherit",
+            maxWidth: 1920,
+            borderRadius: 1,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              mx: 2,
+              minHeight: 500,
+              maxHeight: 500,
+            }}
+          >
             <Card>
               <CardMedia
                 component="img"
@@ -117,52 +120,75 @@ function Item(props) {
                 }
                 alt={title}
                 sx={{ alignContent: "center", maxWidth: 500 }}
-              /></Card>
+              />
+            </Card>
           </Box>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "space-around",
-            mx: 2,
-            maxWidth: 500,
-
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              mx: 2,
+              maxWidth: 500,
+            }}
+          >
             <Card>
-              <CardContent sx={{
-                flex: '1 0 auto',
-              }}>
+              <CardContent
+                sx={{
+                  flex: "1 0 auto",
+                }}
+              >
                 <Typography component="div" variant="h5">
                   {title}
                 </Typography>
-                <Typography variant="subtitle1" color="text.secondary" component="div">
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
                   {authors}
                 </Typography>
                 <br></br>
-                <Typography variant="subtitle2" color="text.secondary" component="div">
+                <Typography
+                  variant="subtitle2"
+                  color="text.secondary"
+                  component="div"
+                >
                   {bookDesc && bookDesc.description}
                 </Typography>
               </CardContent>
             </Card>
           </Box>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "space-around",
-            mx: 2,
-            maxHeight: 100,
-
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              mx: 2,
+              maxHeight: 100,
+            }}
+          >
             <Card>
-              <IconButton color="secondary"
+              <IconButton
+                color="secondary"
                 aria-label="add to favorites"
                 onClick={() => handleShoppingClick()}
               >
-                <ShoppingCartIcon />Add to Cart
+                <ShoppingCartIcon />
+                Add to Cart
               </IconButton>
-              <CardContent><Typography variant="h6" >Price: ${price}</Typography></CardContent>
+              <CardContent>
+                <Typography variant="h6">Price: ${price}</Typography>
+              </CardContent>
             </Card>
           </Box>
         </Box>
         <Box>
-          <Card ><CardContent ><Typography variant="h6" maxHeight={25}>Other Books from {subject}</Typography></CardContent></Card>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" maxHeight={25}>
+                Other Books from {subject}
+              </Typography>
+            </CardContent>
+          </Card>
           {similarBooks &&
             similarBooks.works.map((work) => (
               <Button onClick={() => setInvoke(Math.random())}>
@@ -173,7 +199,7 @@ function Item(props) {
                     authors: work.authors[0].name,
                     coverId: work.cover_id,
                     bookId: work.key,
-                    subject: bookDesc.subjects[1]
+                    subject: bookDesc.subjects[1],
                   }}
                   style={{ textDecoration: "none" }}
                 >
@@ -197,7 +223,6 @@ function Item(props) {
                   </Card>
                 </Link>
               </Button>
-
             ))}
         </Box>
       </ThemeProvider>
