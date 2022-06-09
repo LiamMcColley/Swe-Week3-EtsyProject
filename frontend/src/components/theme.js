@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles"
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
     components: {
@@ -6,30 +6,26 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     padding: 2,
-                }
-            }
-        }
+                },
+            },
+        },
     },
+
     palette: {
-        type: 'light',
+        type: "light",
         primary: {
-            main: '#8B4513',
+            main: "#8B4513",
         },
         secondary: {
-            main: '#ffa726',
+            main: "#f0deba",
         },
         error: {
-            main: '#d20303',
+            main: "#d20303",
         },
         background: {
-            default: '#F3E4C7',
-            paper: '#f0deba',
+            paper: "#F3E4C7",
         },
     },
 });
-
-
-
-
 
 export default theme;

@@ -2,6 +2,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import "./App.css";
 import AccessTokenProvider from "./contexts/accessTokenContext";
 import CartArrayProvider from "./contexts/cartContext";
+import PageProvider from "./contexts/pageContext";
 
 import Cart from "./components/cart";
 import Home from "./components/Home";
@@ -12,28 +13,30 @@ export default function App() {
   return (
     <>
       <CartArrayProvider>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Navbar />}>
-              <Route index element={<Home />} />
-              <Route path="/cart" element={<Cart items={sampleItems} />} />
-              <Route path="/item" element={<Item />} />
-              <Route
-                path="*"
-                element={
-                  <main style={{ padding: "1rem 0" }}>
-                    <h2>404 not found</h2>
-                    <p>
-                      <Link to="/">
-                        This link can take you back home though
-                      </Link>
-                    </p>
-                  </main>
-                }
-              />
-            </Route>
-          </Routes>
-        </div>
+        <PageProvider>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Navbar />}>
+                <Route index element={<Home />} />
+                <Route path="/cart" element={<Cart items={sampleItems} />} />
+                <Route path="/item" element={<Item />} />
+                <Route
+                  path="*"
+                  element={
+                    <main style={{ padding: "1rem 0" }}>
+                      <h2>404 not found</h2>
+                      <p>
+                        <Link to="/">
+                          This link can take you back home though
+                        </Link>
+                      </p>
+                    </main>
+                  }
+                />
+              </Route>
+            </Routes>
+          </div>
+        </PageProvider>
       </CartArrayProvider>
     </>
   );

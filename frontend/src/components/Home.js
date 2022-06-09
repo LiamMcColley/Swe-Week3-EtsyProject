@@ -9,19 +9,24 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import PaginationBasic from "./PaginationBasic";
 import CarouselBasic from "./Carousel";
 import "../App.css";
+import { PageContext } from "../contexts/pageContext";
 
 function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [bookPerPage, setBookPerPage] = useState(8);
+
+  const { page, setPage } = useContext(PageContext);
+
+  const { state } = useLocation();
 
   const indexOfLastBook = currentPage * bookPerPage;
   const indexOfFirstBook = indexOfLastBook - bookPerPage;
@@ -31,14 +36,16 @@ function Home() {
       .then((res) => res.json())
       //.then((data) => console.log(data))
       .then((data) => {
-        setBooks(data.works)
+        setBooks(data.works);
       });
-
   };
 
   useEffect(() => {
-    getBooks("fiction");
-  }, []);
+    setPage(window.location.href);
+    if (state) getBooks(state.genre);
+    else getBooks("fiction");
+    //console.log(books);
+  }, [state, setPage]);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
