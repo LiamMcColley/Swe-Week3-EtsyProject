@@ -86,13 +86,11 @@ function Item(props) {
   const handleShoppingClick = () => {
     <Alert severity="success">Added To Cart</Alert>
     setCartItems(cartEntry);
-    console.log(cartItems);
   };
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        {similarBooks && console.log(similarBooks)}
         <Box sx={{
           display: 'flex',
           justifyContent: "center",
