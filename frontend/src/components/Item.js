@@ -34,6 +34,8 @@ function Item(props) {
 
   let cartEntry = {};
 
+
+
   if (cartItems) {
     cartEntry = JSON.parse(JSON.stringify(cartItems));
   }
