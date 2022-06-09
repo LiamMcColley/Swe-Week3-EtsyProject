@@ -134,6 +134,7 @@ function Home() {
                       authors: work.authors[0].name,
                       coverId: work.cover_id,
                       bookId: work.key,
+                      subject: work.subject[1],
                     }}
                     style={{ textDecoration: "none" }}
                   >
