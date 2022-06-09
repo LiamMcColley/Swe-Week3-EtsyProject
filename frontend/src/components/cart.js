@@ -11,6 +11,7 @@ import Appraise from "./appraiser";
 import { CartContext } from "../contexts/cartContext";
 import { PageContext } from "../contexts/pageContext";
 import TextField from "@mui/material/TextField";
+import Divider from '@mui/material/Divider';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -78,6 +79,7 @@ function Cart() {
 
               {cartItems &&
                 Object.keys(cartItems).map((book) => {
+                  if(cartItems[book].count > 0) {
                   return (
                     <>
                       <Item>
@@ -109,7 +111,7 @@ function Cart() {
                               type="number"
                               size="small"
                               min="0"
-                              inputProps={{ min: 1, max: 20 }}
+                              inputProps={{ min: 0, max: 20 }}
                               defaultValue={cartItems[book].count}
                               onChange={(e) => {
                                 let temp = JSON.parse(
@@ -133,17 +135,36 @@ function Cart() {
                         </Grid>
                       </Item>
                     </>
-                  );
+                  );}
+                  else {
+                    delete cartItems[book];
+                    if(Object.keys(cartItems).length <=0) {
+                      return(
+                      <>
+                        <Item style={{ width: "50vw" }}>
+                          <br />
+                          <br />
+                          <br />
+                          <h1>No Items in the Cart!</h1>
+                          <br />
+                          <br />
+                          <br />
+                        </Item>
+                     </>
+                    );
+                    }
+                  }
                 })}
             </Stack>
           </Grid>
           <Grid Item xs={4} alignItems={"flex-start"}>
             <Item>
               {/*{getSubtotal()}*/}
-              <h2>Subtotal: ${subtotal}</h2>
-              <h2>Shipping: $5</h2>
-              <h2>Tax: ${(subtotal * 0.05).toFixed(2)}</h2>
-              <h1>Total: ${(subtotal * 1.05 + 5).toFixed(2)}</h1>
+              <h4>Subtotal: ${subtotal}</h4>
+              <h4>Shipping: {subtotal===0?"$0":"$5"}</h4>
+              <h4>Tax: ${(subtotal * 0.05).toFixed(2)}</h4>
+              <Divider variant="middle" /><br />
+              <h3>Total: ${(subtotal * 1.05 + subtotal===0?0:5).toFixed(2)}</h3>
             </Item>
             <br />
             {/* <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button> */}
