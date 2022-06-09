@@ -37,7 +37,6 @@ function Home() {
       //.then((data) => console.log(data))
       .then((data) => {
         setBooks(data.works);
-        //console.log(data.works);
       });
   };
 

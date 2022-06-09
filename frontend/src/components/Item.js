@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -20,6 +19,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
 import { PageContext } from "../contexts/pageContext";
+import "../App.css";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -35,18 +35,18 @@ function Item(props) {
   let cartEntry = {};
 
   if (cartItems) {
-    cartEntry = cartItems;
+    cartEntry = JSON.parse(JSON.stringify(cartItems));
   }
-  cartEntry[title] = {
-    author: authors,
-    img: "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg",
-    count: 1,
-  };
 
-  // if (cartEntry[title]) {
-  //   cartEntry[title].count = cartEntry[title].count + 1;
-  // } else {
-  // }
+  if (cartEntry[title]) {
+    cartEntry[title].count = cartEntry[title].count + 1;
+  } else {
+    cartEntry[title] = {
+      author: authors,
+      img: "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg",
+      count: 1,
+    };
+  }
 
   useEffect(() => {
     setPage(window.location.href);
@@ -77,15 +77,11 @@ function Item(props) {
 
   const handleShoppingClick = () => {
     setCartItems(cartEntry);
-
     console.log(cartItems);
   };
 
   return (
     <>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
       <br></br>
       <br></br>
       <Grid container spacing={2}>
@@ -121,7 +117,7 @@ function Item(props) {
                 <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
-                <Carousel variant="dark">
+                <Carousel variant="dark" className="carouselItemImage">
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
@@ -136,7 +132,9 @@ function Item(props) {
                             }}
                             style={{ textDecoration: "none" }}
                           >
-                            <Card sx={{ minWidth: 275, maxWidth: 345 }}>
+                            <Card
+                              sx={{ minWidth: 275, maxWidth: 275, height: 400 }}
+                            >
                               <CardMedia
                                 component="img"
                                 height="200"

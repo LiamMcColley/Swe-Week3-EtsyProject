@@ -3,7 +3,6 @@ import { Carousel } from "react-bootstrap";
 import "../App.css";
 
 function CarouselBasic(props) {
-  //console.log(props.work)
   const randomIndex = Math.floor(Math.random() * 10 + 1);
   return (
     <div>
