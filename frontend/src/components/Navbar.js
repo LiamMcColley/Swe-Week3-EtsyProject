@@ -15,6 +15,7 @@ import {
   Card,
   Stack,
   Avatar,
+  CardHeader,
 } from "@mui/material";
 import React from "react";
 import { PageContext } from "../contexts/pageContext";
@@ -58,25 +59,73 @@ function Navbar(props) {
 
               {page && page.substring(page.length - 1) !== "/" ? (
                 <Box sx={{ flexGrow: 1 }}>
-                  <Link to="/" style={{ textDecoration: "none" }}>
-                    <Card sx={{ maxWidth: 200 }}>
-                      <Avatar
-                        //onClick={() => getBooks("fiction")}
-                        className="avatar"
-                        alt="Remy Sharp"
-                        src="https://img.buzzfeed.com/buzzfeed-static/static/2020-05/15/23/asset/055e07cd8f2e/sub-buzz-3206-1589584307-17.jpg"
-                        sx={{ width: 50, height: 50 }}
-                      />
-                      <Typography
-                        variant="h6"
-                        component="h1"
-                        className="logo"
-                        sx={{ flexGrow: 1 }}
-                      >
-                        Fiction
-                      </Typography>
-                    </Card>
-                  </Link>
+                  <Stack direction="row" spacing={2}>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <Card sx={{ maxWidth: 200 }}>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              src="https://img.buzzfeed.com/buzzfeed-static/static/2020-05/15/23/asset/055e07cd8f2e/sub-buzz-3206-1589584307-17.jpg"
+                              aria-label="Fiction"
+                            />
+                          }
+                          title="Fiction"
+                        />
+                      </Card>
+                    </Link>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <Card sx={{ maxWidth: 200 }}>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              src="https://images-na.ssl-images-amazon.com/images/I/61FR7FcEqEL.jpg"
+                              aria-label="Romance"
+                            />
+                          }
+                          title="Romance"
+                        />
+                      </Card>
+                    </Link>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <Card sx={{ maxWidth: 200 }}>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              src="https://readersentertainment.com/wp-content/uploads/2012/09/Drama.png"
+                              aria-label="Drama"
+                            />
+                          }
+                          title="Drama"
+                        />
+                      </Card>
+                    </Link>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <Card sx={{ maxWidth: 200 }}>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              src="https://static.onecms.io/wp-content/uploads/sites/23/2014/06/10/stack-of-classic-novels.jpg"
+                              aria-label="Classical Literature"
+                            />
+                          }
+                          title="Classical Literature"
+                        />
+                      </Card>
+                    </Link>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <Card sx={{ maxWidth: 200 }}>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              src="https://damonza.com/wp-content/uploads/portfolio/fiction/torrent-15.jpg"
+                              aria-label="Adventure"
+                            />
+                          }
+                          title="Adventure"
+                        />
+                      </Card>
+                    </Link>
+                  </Stack>
                 </Box>
               ) : null}
 
