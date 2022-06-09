@@ -18,6 +18,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
+import "../App.css";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -56,9 +57,6 @@ function Item(props) {
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data))
-
-
-
   }, [invoke]);
 
 
@@ -123,7 +121,9 @@ function Item(props) {
                 <Typography>{bookDesc && bookDesc.description}</Typography>
               </CardContent>
               <CardContent>
-                <Carousel>
+
+                <Carousel variant="dark" className="carouselItemImage">
+
                   {similarBooks &&
                     similarBooks.works.map((work) => (
                       <Carousel.Item>
@@ -138,7 +138,7 @@ function Item(props) {
                             }}
                             style={{ textDecoration: "none" }}
                           >
-                            <Card sx={{ minWidth: 275, maxWidth: 345 }}>
+                            <Card sx={{ minWidth: 275, maxWidth: 275, height: 400 }}>
                               <CardMedia
                                 component="img"
                                 height="200"
