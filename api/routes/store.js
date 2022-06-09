@@ -28,6 +28,23 @@ router.get("/subjects", async (req, res, next) => {
     res.status(500).send(err);
   }
 });
+router.get("/subjects5", async (req, res, next) => {
+  try {
+    const url =
+      "http://openlibrary.org/subjects/" +
+      req.query.subject +
+      ".json?limit=5?offset=50";
+    const data = await fetch(url, {})
+      .catch((err) => console.log(err))
+      .then((res) => res.json())
+      .then((data) => data);
+
+    res.status(200).send(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 
 router.get("/author", async (req, res, next) => {
   try {
