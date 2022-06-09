@@ -151,12 +151,13 @@ function Item(props) {
 
           }}>
             <Card>
-              <IconButton color="secondary"
+
+              <Button color="secondary" variant="contained" startIcon={<ShoppingCartIcon />}
                 aria-label="add to favorites"
                 onClick={() => handleShoppingClick()}
               >
-                <ShoppingCartIcon />Add to Cart
-              </IconButton>
+                Add to Cart
+              </Button>
               <CardContent><Typography variant="h6" >Price: ${price}</Typography></CardContent>
             </Card>
           </Box>
