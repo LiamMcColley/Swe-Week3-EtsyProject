@@ -12,6 +12,11 @@ import { CartContext } from "../contexts/cartContext";
 import { PageContext } from "../contexts/pageContext";
 import TextField from "@mui/material/TextField";
 import Divider from '@mui/material/Divider';
+import theme from "./theme.js"
+import { ThemeProvider } from "@mui/material";
+
+
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -48,6 +53,7 @@ function Cart() {
 
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <br /> <br /> <br /> <br />
       <Box
         sx={{
@@ -170,7 +176,8 @@ function Cart() {
             {/* <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button> */}
           </Grid>
         </Grid>
-      </Box>
+      </Box
+      </ThemeProvider>
     </div>
   );
 }

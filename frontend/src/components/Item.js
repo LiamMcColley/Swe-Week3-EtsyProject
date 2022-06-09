@@ -86,13 +86,11 @@ function Item(props) {
   const handleShoppingClick = () => {
     <Alert severity="success">Added To Cart</Alert>
     setCartItems(cartEntry);
-    console.log(cartItems);
   };
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        {similarBooks && console.log(similarBooks)}
         <Box sx={{
           display: 'flex',
           justifyContent: "center",
@@ -153,12 +151,13 @@ function Item(props) {
 
           }}>
             <Card>
-              <IconButton color="secondary"
+
+              <Button color="secondary" variant="contained" startIcon={<ShoppingCartIcon />}
                 aria-label="add to favorites"
                 onClick={() => handleShoppingClick()}
               >
-                <ShoppingCartIcon />Add to Cart
-              </IconButton>
+                Add to Cart
+              </Button>
               <CardContent><Typography variant="h6" >Price: ${price}</Typography></CardContent>
             </Card>
           </Box>
