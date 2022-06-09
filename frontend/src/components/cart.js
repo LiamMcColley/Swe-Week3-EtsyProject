@@ -10,7 +10,6 @@ import Stack from '@mui/material/Stack';
 import Appraise from './appraiser';
 import { CartContext } from "../contexts/cartContext";
 import TextField from '@mui/material/TextField';
-// import {useContext} from "@types/react";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -19,12 +18,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
-let hi = {
-  "Wuthering Heights": { author: "Emily Bronte", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Houghton_Lowell_1238.5_%28A%29_-_Wuthering_Heights%2C_1847.jpg/800px-Houghton_Lowell_1238.5_%28A%29_-_Wuthering_Heights%2C_1847.jpg", count: 2 },
-  "Jane Eyre": { author: "Charlotte Bronte", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Jane_Eyre_title_page.jpg/800px-Jane_Eyre_title_page.jpg", count: 1 },
-  "To Kill a Mockingbird": { author: "Harper Lee", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg/800px-To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg", count: 2 },
-};
 
 function Cart() {
   // const { cartItems, setCartItems } = useContext(CartContext);
@@ -36,7 +29,7 @@ function Cart() {
 
   const getSubtotal = () => {
     let sum = 0;
-    Object.keys(cartItems).forEach(book => sum += Appraise(book) * cartItems[book].count);
+    cartItems&&Object.keys(cartItems).forEach(book => sum += Appraise(book) * cartItems[book].count);
     setSubtotal(sum);
   };
 
@@ -51,16 +44,26 @@ function Cart() {
   return (
     <div >
       <br />  <br />  <br />  <br />
-      <Box sx={{ flexGrow: 1, width: "75vw", display: "flex", justifyContent: "center" }}>
-        <Grid container spacing={2}>
+      <Box sx={{ flexGrow: 1, width: "75vw", display: "flex", justifyContent: "flex-start" , alignItems: "flex-start" }}>
+        <Grid container spacing={2} sx={{alignItems: "flex-start"}}>
           <Grid Item container spacing={2} xs={8}>
 
             {/*{console.log(Object.keys(cartItems)}*/}
             <Stack>
               {/*<p>hi</p>*/}
+             {!cartItems&&
+               <>
+                 <Item style={{ width: "50vw" }}>
+                    <br/><br/><br/>
+                    <h1>No Items in the Cart!</h1>
+                    <br/><br/><br/>
+                 </Item>
+               </>
+             }
+  
               {cartItems&&Object.keys(cartItems).map((book) => {
                 return (
-                  <><Item style={{ width: "50vw" }}>
+                  <><Item>
                     <Grid container spacing={2} columns={16} sx={{ alignItems: "center" }}  >
                       <Grid item xs={3}><img src={cartItems[book].img} width={64} alt={book + " by " + cartItems[book].author} /></Grid>
                       {/*{console.log(book)}*/}
@@ -73,11 +76,11 @@ function Cart() {
                             label="Count"
                             type="number"
                             size="small"
-                            fullWidth="false"
+                            min = "0"
+                            inputProps={{ min: 1, max: 20 }}
                             defaultValue= {cartItems[book].count}
                                 onChange={(e) => {
                               let temp = JSON.parse(JSON.stringify(cartItems));
-                              console.log(e.target.value);
                               temp[book].count = e.target.value;
                               setCartItems(temp);
                             }}
@@ -87,7 +90,7 @@ function Cart() {
                               inputProps: { min: 0, max: 10 }
 
                             }}
-                            style ={{width: '30%'}}
+                            style ={{width: '50%'}}
                         />
                       </Grid>
                       {/*{cartItems[book].count}*/}
@@ -98,7 +101,7 @@ function Cart() {
               })}
             </Stack>
           </Grid>
-          <Grid Item xs={4}>
+          <Grid Item xs={4} alignItems={'flex-start'}>
             <Item>
               {/*{getSubtotal()}*/}
               <h2>Subtotal: ${subtotal}</h2>
@@ -107,7 +110,7 @@ function Cart() {
               <h1>Total: ${(subtotal * 1.05 + 5).toFixed(2)}</h1>
             </Item>
             <br />
-            <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button>
+            {/* <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button> */}
           </Grid>
         </Grid>
       </Box>
