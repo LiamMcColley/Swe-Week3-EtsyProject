@@ -9,7 +9,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -26,6 +26,8 @@ function Home() {
 
   const { page, setPage } = useContext(PageContext);
 
+  const { state } = useLocation();
+
   const indexOfLastBook = currentPage * bookPerPage;
   const indexOfFirstBook = indexOfLastBook - bookPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
@@ -41,9 +43,10 @@ function Home() {
 
   useEffect(() => {
     setPage(window.location.href);
-    getBooks("fiction");
+    if (state) getBooks(state.genre);
+    else getBooks("fiction");
     //console.log(books);
-  }, []);
+  }, [state, setPage]);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

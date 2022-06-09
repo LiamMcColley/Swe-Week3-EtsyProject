@@ -60,7 +60,13 @@ function Navbar(props) {
               {page && page.substring(page.length - 1) !== "/" ? (
                 <Box sx={{ flexGrow: 1 }}>
                   <Stack direction="row" spacing={2}>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link
+                      to="/"
+                      state={{
+                        genre: "fiction",
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card sx={{ maxWidth: 200 }}>
                         <CardHeader
                           avatar={
@@ -73,7 +79,14 @@ function Navbar(props) {
                         />
                       </Card>
                     </Link>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+
+                    <Link
+                      to="/"
+                      state={{
+                        genre: "love",
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card sx={{ maxWidth: 200 }}>
                         <CardHeader
                           avatar={
@@ -86,7 +99,13 @@ function Navbar(props) {
                         />
                       </Card>
                     </Link>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link
+                      to="/"
+                      state={{
+                        genre: "drama",
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card sx={{ maxWidth: 200 }}>
                         <CardHeader
                           avatar={
@@ -99,7 +118,13 @@ function Navbar(props) {
                         />
                       </Card>
                     </Link>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link
+                      to="/"
+                      state={{
+                        genre: "classic literatures",
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card sx={{ maxWidth: 200 }}>
                         <CardHeader
                           avatar={
@@ -112,7 +137,13 @@ function Navbar(props) {
                         />
                       </Card>
                     </Link>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link
+                      to="/"
+                      state={{
+                        genre: "adventure",
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card sx={{ maxWidth: 200 }}>
                         <CardHeader
                           avatar={
