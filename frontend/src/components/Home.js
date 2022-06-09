@@ -37,10 +37,10 @@ function Home() {
         setBooks(data.works);
         //console.log(data.works);
       });
-    setPage(window.location.href);
   };
 
   useEffect(() => {
+    setPage(window.location.href);
     getBooks("fiction");
     //console.log(books);
   }, []);

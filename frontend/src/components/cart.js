@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Appraise from "./appraiser";
 import { CartContext } from "../contexts/cartContext";
+import { PageContext } from "../contexts/pageContext";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -39,6 +40,7 @@ let sample_cart = {
 
 function Cart() {
   const { cartItems, setCartItems } = useContext(CartContext);
+  const { page, setPage } = useContext(PageContext);
 
   // let cart = sample_cart;
   const [subtotal, setSubtotal] = useState(0);
@@ -54,6 +56,7 @@ function Cart() {
   //useState, useReducer (get functions to change it)
 
   useEffect(() => {
+    setPage(window.location.href);
     getSubtotal();
   }, []);
 

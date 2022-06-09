@@ -56,8 +56,7 @@ function Navbar(props) {
                 </Link>
               </Box>
 
-              {page &&
-              page.substring(page.length - 4, page.length) === "item" ? (
+              {page && page.substring(page.length - 1) !== "/" ? (
                 <Box sx={{ flexGrow: 1 }}>
                   <Link to="/" style={{ textDecoration: "none" }}>
                     <Card sx={{ maxWidth: 200 }}>

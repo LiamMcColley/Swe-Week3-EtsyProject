@@ -49,13 +49,13 @@ function Item(props) {
   // }
 
   useEffect(() => {
+    setPage(window.location.href);
     fetch("http://localhost:9000/store/subjects?subject=" + "love")
       .then((res) => res.json())
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data));
-    setPage(window.location.href);
   }, [invoke]);
 
   const ExpandMore = styled((props) => {
