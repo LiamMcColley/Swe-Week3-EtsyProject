@@ -25,6 +25,7 @@ import { PageContext } from "../contexts/pageContext";
 import "../App.css";
 import theme from "./theme.js";
 import Appraise from "./appraiser";
+import "../App.css";
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -182,7 +183,7 @@ function Item(props) {
             </Card>
           </Box>
         </Box>
-        <Box>
+        <Box className="box">
           <Card>
             <CardContent>
               <Typography variant="h6" maxHeight={25}>
@@ -204,7 +205,10 @@ function Item(props) {
                   }}
                   style={{ textDecoration: "none" }}
                 >
-                  <Card sx={{ minWidth: 275, maxWidth: 275, height: 400 }}>
+                  <Card
+                    sx={{ minWidth: 275, maxWidth: 275, height: 400 }}
+                    className="card"
+                  >
                     <CardMedia
                       component="img"
                       height="200"
