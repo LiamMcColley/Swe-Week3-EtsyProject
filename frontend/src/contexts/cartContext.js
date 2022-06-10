@@ -14,5 +14,3 @@ function CartArrayProvider({ children }) {
 export default CartArrayProvider;
 export { CartContext };
 
-
-//Title, {author, img src, count}
