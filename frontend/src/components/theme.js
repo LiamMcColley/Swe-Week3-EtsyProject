@@ -5,7 +5,10 @@ const theme = createTheme({
         MuiCardHeader: {
             styleOverrides: {
                 root: {
-                    padding: 2,
+                    "padding-top": 2,
+                    "padding-bottom": 2,
+
+
                 },
             },
         },
