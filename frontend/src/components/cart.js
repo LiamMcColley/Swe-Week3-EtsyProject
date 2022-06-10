@@ -176,7 +176,7 @@ function Cart() {
             {/* <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button> */}
           </Grid>
         </Grid>
-      </Box
+      </Box>
       </ThemeProvider>
     </div>
   );
