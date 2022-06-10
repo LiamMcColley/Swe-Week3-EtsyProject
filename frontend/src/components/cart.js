@@ -15,6 +15,9 @@ import { ThemeProvider } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import Button from '@mui/material/Button';
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -99,7 +102,7 @@ function Cart() {
                                 {cartItems[book].author}
                               </Grid>
 
-                              <Grid item xs={4}>
+                              <Grid item xs={3}>
 
                                 <TextField
                                   id="outlined-number"
@@ -122,7 +125,7 @@ function Cart() {
                                 />
                               </Grid>
 
-                              <Grid item xs={3}>
+                              <Grid item xs={2}>
 
                                 ${cartItems[book].count * Appraise(book)}
                               </Grid>
@@ -167,14 +170,12 @@ function Cart() {
                 <h4>Subtotal: ${subtotal}</h4>
                 <h4>Shipping: {subtotal === 0 ? "$0" : "$5"}</h4>
                 <h4>Tax: ${(subtotal * 0.05).toFixed(2)}</h4>
-                <Divider variant="middle" />
-                <br />
-                <h3>
-                  Total: $
-                  {(subtotal * 1.05 + subtotal === 0 ? 0 : 5).toFixed(2)}
-                </h3>
-              </Item>
+
+                <Divider variant="middle" /><br />
+                <h3>Total: ${(subtotal+subtotal*0.05+(subtotal===0?0:5)).toFixed(2)}</h3>
+                </Item>
               <br />
+              <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button>
 
             </Grid>
           </Grid>
