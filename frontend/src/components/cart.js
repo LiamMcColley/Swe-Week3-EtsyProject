@@ -169,8 +169,9 @@ function Cart() {
             </Grid>
             <Grid Item xs={4} alignItems={"flex-start"}>
               <Item>
-                <h4>Subtotal: ${subtotal}</h4>
-                <h4>Shipping: {subtotal === 0 ? "$0" : "$5"}</h4>
+                <br/>
+                <h4>Subtotal: ${subtotal.toFixed(2)}</h4>
+                <h4>Shipping: ${(subtotal === 0 ? 0 : 5).toFixed(2)}</h4>
                 <h4>Tax: ${(subtotal * 0.05).toFixed(2)}</h4>
 
                 <Divider variant="middle" /><br />
