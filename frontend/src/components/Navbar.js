@@ -1,15 +1,12 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { AccessTokenContext } from "../contexts/accessTokenContext";
+import { Link, Outlet } from "react-router-dom";
+import { useEffect, useContext } from "react";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
-  Button,
   Typography,
   AppBar,
   Toolbar,
-  createTheme,
   ThemeProvider,
   Box,
   Card,
@@ -28,13 +25,6 @@ function Navbar(props) {
   useEffect(() => {
     setPage(window.location.href);
   }, [page, setPage]);
-
-  console.log(
-    window.location.href.substring(
-      window.location.href.length - 4,
-      window.location.href.length
-    )
-  );
 
   return (
     <header>
@@ -174,9 +164,6 @@ function Navbar(props) {
             </Toolbar>
           </AppBar>
         </Box>
-        {/* <AppBar className="header" style={{ backgroundColor: "primary" }}>
-          {displayDesktop()}
-        </AppBar> */}
       </ThemeProvider>
       <FormControl>
         <Outlet />
