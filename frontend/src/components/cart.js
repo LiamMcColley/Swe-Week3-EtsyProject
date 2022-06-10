@@ -69,6 +69,8 @@ function Cart() {
               {/*{console.log(Object.keys(cartItems)}*/}
               <Stack>
                 {/*<p>hi</p>*/}
+                <p></p>
+
                 {!cartItems && (
                   <>
                     <Item style={{ width: "50vw" }}>
