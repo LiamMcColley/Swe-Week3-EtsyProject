@@ -29,12 +29,7 @@ function Navbar(props) {
     setPage(window.location.href);
   }, [page, setPage]);
 
-  console.log(
-    window.location.href.substring(
-      window.location.href.length - 4,
-      window.location.href.length
-    )
-  );
+
 
   return (
     <header>
@@ -174,9 +169,7 @@ function Navbar(props) {
             </Toolbar>
           </AppBar>
         </Box>
-        {/* <AppBar className="header" style={{ backgroundColor: "primary" }}>
-          {displayDesktop()}
-        </AppBar> */}
+
       </ThemeProvider>
       <FormControl>
         <Outlet />
