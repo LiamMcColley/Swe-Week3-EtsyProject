@@ -64,6 +64,7 @@ function Cart() {
               <Stack>
                 {!cartItems && (
                   <>
+                  <p></p>
                     <Item style={{ width: "50vw" }}>
                       <br />
                       <br />
@@ -76,12 +77,11 @@ function Cart() {
                   </>
                 )}
                 <p></p>
-                {cartItems &&
-                  Object.keys(cartItems).map((book) => {
+                {cartItems&&<Item style={{ width: "50vw" }}> <br/>
+                {Object.keys(cartItems).map((book, index, arr) => {
                     if (cartItems[book].count > 0) {
                       return (
                         <>
-                          <Item>
                             <Grid
                               container
                               spacing={2}
@@ -121,7 +121,7 @@ function Cart() {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
-                                  style={{ width: "50%" }}
+                                  style={{ width: "75%" }}
                                 />
                               </Grid>
 
@@ -139,9 +139,9 @@ function Cart() {
                                 }}>
                                   <DeleteIcon fontSize="inherit" />
                                  </IconButton>
-                              </Grid>
+                              </Grid>                            
                             </Grid>
-                          </Item>
+                          {(arr.length-1 > index)&&<><br/><Divider variant="middle" /><br/></>}
                         </>
                       );
                     } else {
@@ -163,6 +163,8 @@ function Cart() {
                       }
                     }
                   })}
+                  <br/>
+                  </Item>}
               </Stack>
             </Grid>
             <Grid Item xs={4} alignItems={"flex-start"}>
