@@ -27,9 +27,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Cart() {
-  // const { cartItems, setCartItems } = useContext(CartContext);
-  // (e) => cartItems[book].count = e.currentTarget.value
-  // let cart = cartItems;
   const { cartItems, setCartItems } = useContext(CartContext);
   const { page, setPage } = useContext(PageContext);
 
@@ -43,8 +40,6 @@ function Cart() {
       );
     setSubtotal(sum);
   };
-
-  //useState, useReducer (get functions to change it)
 
   useEffect(() => {
     setPage(window.location.href);
@@ -66,9 +61,8 @@ function Cart() {
         >
           <Grid container spacing={2} sx={{ alignItems: "flex-start" }}>
             <Grid Item container spacing={2} xs={8}>
-              {/*{console.log(Object.keys(cartItems)}*/}
+          
               <Stack>
-                {/*<p>hi</p>*/}
                 {!cartItems && (
                   <>
                     <Item style={{ width: "50vw" }}>
@@ -102,7 +96,7 @@ function Cart() {
                                   alt={book + " by " + cartItems[book].author}
                                 />
                               </Grid>
-                              {/*{console.log(book)}*/}
+                        
                               <Grid item xs={3}>
                                 {book}
                               </Grid>
@@ -110,7 +104,7 @@ function Cart() {
                                 {cartItems[book].author}
                               </Grid>
                               <Grid item xs={4}>
-                                {/*<NumericInput min={1} value={cartItems[book].count} onChange={() => cartItems[book].count += 1} />*/}
+                               
                                 <TextField
                                   id="outlined-number"
                                   label="Count"
@@ -134,7 +128,7 @@ function Cart() {
                                   style={{ width: "50%" }}
                                 />
                               </Grid>
-                              {/*{cartItems[book].count}*/}
+      
                               <Grid item xs={3}>
                                 ${cartItems[book].count * Appraise(book)}
                               </Grid>
@@ -166,7 +160,7 @@ function Cart() {
             </Grid>
             <Grid Item xs={4} alignItems={"flex-start"}>
               <Item>
-                {/*{getSubtotal()}*/}
+         
                 <h4>Subtotal: ${subtotal}</h4>
                 <h4>Shipping: {subtotal === 0 ? "$0" : "$5"}</h4>
                 <h4>Tax: ${(subtotal * 0.05).toFixed(2)}</h4>
@@ -174,7 +168,7 @@ function Cart() {
                 <h3>Total: ${(subtotal * 1.05 + subtotal === 0 ? 0 : 5).toFixed(2)}</h3>
               </Item>
               <br />
-              {/* <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button> */}
+              
             </Grid>
           </Grid>
         </Box>
