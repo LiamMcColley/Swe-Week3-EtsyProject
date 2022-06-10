@@ -14,9 +14,8 @@ import TextField from "@mui/material/TextField";
 import Divider from '@mui/material/Divider';
 import theme from "./theme.js"
 import { ThemeProvider } from "@mui/material";
-
-
-
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -77,7 +76,7 @@ function Cart() {
                     </Item>
                   </>
                 )}
-
+                <p></p>
                 {cartItems &&
                   Object.keys(cartItems).map((book) => {
                     if (cartItems[book].count > 0) {
@@ -97,21 +96,18 @@ function Cart() {
                                   alt={book + " by " + cartItems[book].author}
                                 />
                               </Grid>
-                        
                               <Grid item xs={3}>
                                 {book}
                               </Grid>
                               <Grid item xs={3}>
                                 {cartItems[book].author}
                               </Grid>
-                              <Grid item xs={4}>
-                               
+                              <Grid item xs={3}>
                                 <TextField
                                   id="outlined-number"
                                   label="Count"
                                   type="number"
                                   size="small"
-                                  min="0"
                                   inputProps={{ min: 0, max: 20 }}
                                   defaultValue={cartItems[book].count}
                                   onChange={(e) => {
@@ -121,17 +117,25 @@ function Cart() {
                                     temp[book].count = e.target.value;
                                     setCartItems(temp);
                                   }}
-                                  // width = {.7}
                                   InputLabelProps={{
                                     shrink: true,
-                                    inputProps: { min: 0, max: 10 },
                                   }}
                                   style={{ width: "50%" }}
                                 />
                               </Grid>
-      
-                              <Grid item xs={3}>
+                              <Grid item xs={2}>
                                 ${cartItems[book].count * Appraise(book)}
+                              </Grid>
+                              <Grid item xs = {2}>
+                                <IconButton aria-label="delete" size="large" onClick={()=>{
+                                  let temp = JSON.parse(
+                                      JSON.stringify(cartItems)
+                                  );
+                                  temp[book].count = 0;
+                                  setCartItems(temp);
+                                }}>
+                                  <DeleteIcon fontSize="inherit" />
+                                 </IconButton>
                               </Grid>
                             </Grid>
                           </Item>
@@ -166,10 +170,10 @@ function Cart() {
                 <h4>Shipping: {subtotal === 0 ? "$0" : "$5"}</h4>
                 <h4>Tax: ${(subtotal * 0.05).toFixed(2)}</h4>
                 <Divider variant="middle" /><br />
-                <h3>Total: ${(subtotal * 1.05 + subtotal === 0 ? 0 : 5).toFixed(2)}</h3>
-              </Item>
+                <h3>Total: ${(subtotal+subtotal*0.05+(subtotal===0?0:5)).toFixed(2)}</h3>
+                </Item>
               <br />
-              
+              <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button>
             </Grid>
           </Grid>
         </Box>
