@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Navbar from "./Navbar";
 import { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,21 +8,18 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { Carousel } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import PaginationBasic from "./PaginationBasic";
 import CarouselBasic from "./Carousel";
 import "../App.css";
 import { PageContext } from "../contexts/pageContext";
-import theme from "./theme.js"
+import theme from "./theme.js";
 import { ThemeProvider } from "@mui/material";
-
 
 function Home() {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [bookPerPage, setBookPerPage] = useState(8);
 
@@ -53,7 +49,6 @@ function Home() {
   return (
     <>
       <ThemeProvider theme={theme}>
-
         <Helmet>
           <title>Books a Trillion</title>
         </Helmet>
@@ -62,7 +57,7 @@ function Home() {
         <br></br>
         <div className="home--container">
           <div className="carousel--container">
-            {books.length != 0 && <CarouselBasic work={books} />}
+            {books.length !== 0 && <CarouselBasic work={books} />}
           </div>
 
           <Stack direction="row" spacing={2} className="avatar--container">
@@ -128,7 +123,13 @@ function Home() {
               className="grid--container"
             >
               {currentBooks.map((work) => (
-                <Grid item xs={12} sm={6} md={3} key={currentBooks.indexOf(work)}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  key={currentBooks.indexOf(work)}
+                >
                   <Button>
                     <Link
                       to="/item"

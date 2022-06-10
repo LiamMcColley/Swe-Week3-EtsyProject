@@ -2,32 +2,23 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  styled,
-  Grid,
   Button,
   Card,
   CardHeader,
   CardMedia,
   CardContent,
-  CardActions,
-  Collapse,
   Typography,
-  IconButton,
   Box,
   ThemeProvider,
   Alert,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Carousel } from "react-bootstrap";
 import { CartContext } from "../contexts/cartContext";
 import { PageContext } from "../contexts/pageContext";
 import "../App.css";
-import theme from "./theme.js"
-import Appraise from './appraiser';
+import theme from "./theme.js";
+import Appraise from "./appraiser";
 import "../App.css";
-
-
 
 function Item(props) {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -57,59 +48,48 @@ function Item(props) {
   }
 
   useEffect(() => {
-
     setPage(window.location.href);
-    fetch("http://localhost:9000/store/subjects5?subject=" + subject.toLowerCase())
+    fetch(
+      "http://localhost:9000/store/subjects5?subject=" + subject.toLowerCase()
+    )
       .then((res) => res.json())
       .then((data) => setSimilarBooks(data));
     fetch("http://localhost:9000/store/book?key=" + bookId)
       .then((res) => res.json())
       .then((data) => setDesc(data));
-  }, [invoke]);
+  }, [bookId, invoke, setPage, subject]);
 
-  const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
-
-  const [expanded, setExpanded] = React.useState(false);
   const price = Appraise(title);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const handleShoppingClick = () => {
-    <Alert severity="success">Added To Cart</Alert>
+    <Alert severity="success">Added To Cart</Alert>;
     setCartItems(cartEntry);
   };
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: "center",
-          flexWrap: 'wrap',
-          p: 1,
-          m: 1,
-          bgcolor: 'inherit',
-          maxWidth: 1920,
-          borderRadius: 1,
-        }}>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "space-around",
-            mx: 2,
-            minHeight: 500,
-            maxHeight: 500,
-
-          }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            p: 1,
+            m: 1,
+            bgcolor: "inherit",
+            maxWidth: 1920,
+            borderRadius: 1,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              mx: 2,
+              minHeight: 500,
+              maxHeight: 500,
+            }}
+          >
             <Card>
               <CardMedia
                 component="img"
@@ -118,53 +98,76 @@ function Item(props) {
                 }
                 alt={title}
                 sx={{ alignContent: "center", maxWidth: 500 }}
-              /></Card>
+              />
+            </Card>
           </Box>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "space-around",
-            mx: 2,
-            maxWidth: 500,
-
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              mx: 2,
+              maxWidth: 500,
+            }}
+          >
             <Card>
-              <CardContent sx={{
-                flex: '1 0 auto',
-              }}>
+              <CardContent
+                sx={{
+                  flex: "1 0 auto",
+                }}
+              >
                 <Typography component="div" variant="h5">
                   {title}
                 </Typography>
-                <Typography variant="subtitle1" color="text.secondary" component="div">
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
                   {authors}
                 </Typography>
                 <br></br>
-                <Typography variant="subtitle2" color="text.secondary" component="div">
+                <Typography
+                  variant="subtitle2"
+                  color="text.secondary"
+                  component="div"
+                >
                   {bookDesc && bookDesc.description}
                 </Typography>
               </CardContent>
             </Card>
           </Box>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "space-around",
-            mx: 2,
-            maxHeight: 100,
-
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              mx: 2,
+              maxHeight: 100,
+            }}
+          >
             <Card>
-
-              <Button color="secondary" variant="contained" startIcon={<ShoppingCartIcon />}
+              <Button
+                color="secondary"
+                variant="contained"
+                startIcon={<ShoppingCartIcon />}
                 aria-label="add to favorites"
                 onClick={() => handleShoppingClick()}
               >
                 Add to Cart
               </Button>
-              <CardContent><Typography variant="h6" >Price: ${price}</Typography></CardContent>
+              <CardContent>
+                <Typography variant="h6">Price: ${price}</Typography>
+              </CardContent>
             </Card>
           </Box>
         </Box>
         <Box className="box">
-          <Card ><CardContent ><Typography variant="h6" maxHeight={25}>Other Books from {subject}</Typography></CardContent></Card>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" maxHeight={25}>
+                Other Books from {subject}
+              </Typography>
+            </CardContent>
+          </Card>
           {similarBooks &&
             similarBooks.works.map((work) => (
               <Button onClick={() => setInvoke(Math.random())}>
@@ -175,11 +178,14 @@ function Item(props) {
                     authors: work.authors[0].name,
                     coverId: work.cover_id,
                     bookId: work.key,
-                    subject: bookDesc.subjects[1]
+                    subject: bookDesc.subjects[1],
                   }}
                   style={{ textDecoration: "none" }}
                 >
-                  <Card sx={{ minWidth: 275, maxWidth: 275, height: 400 }} className="card">
+                  <Card
+                    sx={{ minWidth: 275, maxWidth: 275, height: 400 }}
+                    className="card"
+                  >
                     <CardMedia
                       component="img"
                       height="200"
@@ -199,11 +205,9 @@ function Item(props) {
                   </Card>
                 </Link>
               </Button>
-
             ))}
         </Box>
       </ThemeProvider>
-
     </>
   );
 }

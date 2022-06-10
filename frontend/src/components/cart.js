@@ -4,18 +4,19 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import NumericInput from "react-numeric-input";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Appraise from "./appraiser";
 import { CartContext } from "../contexts/cartContext";
 import { PageContext } from "../contexts/pageContext";
 import TextField from "@mui/material/TextField";
-import Divider from '@mui/material/Divider';
-import theme from "./theme.js"
+import Divider from "@mui/material/Divider";
+import theme from "./theme.js";
 import { ThemeProvider } from "@mui/material";
+<<<<<<< HEAD
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+=======
+>>>>>>> main
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -60,9 +61,7 @@ function Cart() {
         >
           <Grid container spacing={2} sx={{ alignItems: "flex-start" }}>
             <Grid Item container spacing={2} xs={8}>
-          
               <Stack>
-
                 {!cartItems && (
                   <>
                     <Item style={{ width: "50vw" }}>
@@ -102,7 +101,11 @@ function Cart() {
                               <Grid item xs={3}>
                                 {cartItems[book].author}
                               </Grid>
+<<<<<<< HEAD
                               <Grid item xs={3}>
+=======
+                              <Grid item xs={4}>
+>>>>>>> main
                                 <TextField
                                   id="outlined-number"
                                   label="Count"
@@ -123,7 +126,11 @@ function Cart() {
                                   style={{ width: "50%" }}
                                 />
                               </Grid>
+<<<<<<< HEAD
                               <Grid item xs={2}>
+=======
+                              <Grid item xs={3}>
+>>>>>>> main
                                 ${cartItems[book].count * Appraise(book)}
                               </Grid>
                               <Grid item xs = {2}>
@@ -141,8 +148,7 @@ function Cart() {
                           </Item>
                         </>
                       );
-                    }
-                    else {
+                    } else {
                       delete cartItems[book];
                       if (Object.keys(cartItems).length <= 0) {
                         return (
@@ -165,15 +171,25 @@ function Cart() {
             </Grid>
             <Grid Item xs={4} alignItems={"flex-start"}>
               <Item>
-         
                 <h4>Subtotal: ${subtotal}</h4>
                 <h4>Shipping: {subtotal === 0 ? "$0" : "$5"}</h4>
                 <h4>Tax: ${(subtotal * 0.05).toFixed(2)}</h4>
+<<<<<<< HEAD
                 <Divider variant="middle" /><br />
                 <h3>Total: ${(subtotal+subtotal*0.05+(subtotal===0?0:5)).toFixed(2)}</h3>
                 </Item>
               <br />
               <Button variant="contained" onClick={() => getSubtotal()}>Check Out</Button>
+=======
+                <Divider variant="middle" />
+                <br />
+                <h3>
+                  Total: $
+                  {(subtotal * 1.05 + subtotal === 0 ? 0 : 5).toFixed(2)}
+                </h3>
+              </Item>
+              <br />
+>>>>>>> main
             </Grid>
           </Grid>
         </Box>
