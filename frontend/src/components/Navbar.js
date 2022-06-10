@@ -138,7 +138,7 @@ function Navbar(props) {
                         <CardHeader
                           avatar={
                             <Avatar
-                              src="https://damonza.com/wp-content/uploads/portfolio/fiction/torrent-15.jpg"
+                              src="https://i.pinimg.com/564x/8c/27/50/8c27502941b45e7708ab7902ce67ff4a--ebook-cover-cover-art.jpg"
                               aria-label="Adventure"
                             />
                           }
