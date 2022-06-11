@@ -7,6 +7,7 @@ import Cart from "./components/cart";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Item from "./components/Item";
+import StripeContainer from "./components/StripeContainer"
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
                 <Route index element={<Home />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/item" element={<Item />} />
+                <Route path="/payment" element={<StripeContainer />} />
                 <Route
                   path="*"
                   element={

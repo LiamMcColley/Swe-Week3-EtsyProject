@@ -8,6 +8,7 @@ const cors = require("cors");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var appRouter = require("./routes/store");
+var payRouter = require("./routes/payment");
 const dotenv = require("dotenv").config();
 
 var app = express();
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/store", appRouter);
+app.use("/payment", payRouter);
 
 app.use(express.json());
 app.use(cors({ origin: true }));
